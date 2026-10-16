@@ -1,0 +1,2726 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>جامعة القرآن الكريم | كلية الشريعة والقانون</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f8fb;
+  --card:#ffffff;
+  --ink:#1c2534;
+  --ink-2:#4b5565;
+  --muted:#8892a4;
+  --line:#edf0f5;
+  --line-2:#dde3ed;
+
+  --brand:#17568d;
+  --brand-2:#3d8bc7;
+  --brand-soft:#e8f1f9;
+  --brand-deep:#0b3356;
+
+  --ok:#0d9668;
+  --ok-soft:#e5f5ee;
+  --live:#10b981;
+  --live-deep:#059669;
+  --live-soft:#d1fae5;
+  --warn:#c77700;
+  --warn-soft:#fef5e5;
+  --danger:#d02a2a;
+  --danger-soft:#fdecec;
+
+  --r-sm:12px;
+  --r-md:16px;
+  --r-lg:22px;
+  --shadow-sm:0 1px 2px rgba(20,30,50,.04);
+  --shadow-md:0 4px 16px -6px rgba(20,30,50,.09);
+  --shadow-lg:0 20px 40px -20px rgba(20,30,50,.22);
+  --safe-top:env(safe-area-inset-top, 0px);
+  --safe-bottom:env(safe-area-inset-bottom, 0px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  font-family:'Tajawal',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.6;
+  min-height:100dvh;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input,textarea{font-family:inherit;font-size:16px;color:inherit}
+[hidden]{display:none !important}
+img,svg{display:block;max-width:100%}
+h1,h2,h3,h4{font-weight:800;line-height:1.35;letter-spacing:-.01em}
+h1{font-size:22px}
+h2{font-size:19px}
+h3{font-size:16px}
+h4{font-size:14.5px}
+p{color:var(--ink-2);font-size:14.5px}
+
+.view{display:none;min-height:100dvh}
+.view.active{display:flex;flex-direction:column;animation:viewIn .4s cubic-bezier(.2,.7,.2,1)}
+@keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.container{width:100%;max-width:520px;margin:0 auto;padding:20px 18px 120px}
+@media(min-width:720px){.container{max-width:760px;padding:28px 24px 120px}}
+
+.app-bar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--line);
+  padding-top:var(--safe-top);
+}
+.app-bar-inner{
+  max-width:520px;margin:0 auto;padding:10px 18px;
+  display:flex;align-items:center;gap:12px;height:56px;
+}
+@media(min-width:720px){.app-bar-inner{max-width:760px;padding:10px 24px}}
+.app-logo{
+  width:34px;height:34px;border-radius:10px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--brand-deep),var(--brand));
+  color:#fff;display:grid;place-items:center;
+  font-weight:800;font-size:15px;
+  box-shadow:0 6px 14px -6px rgba(23,86,141,.55);
+}
+.app-title{font-size:13.5px;font-weight:700;line-height:1.2;color:var(--ink)}
+.app-subtitle{font-size:11px;color:var(--muted);font-weight:500}
+
+.live-badge{
+  margin-inline-start:auto;
+  display:inline-flex;align-items:center;gap:6px;
+  background:linear-gradient(135deg,var(--live),var(--live-deep));
+  color:#ffffff;
+  padding:5px 11px;border-radius:99px;
+  font-size:11.5px;font-weight:800;
+  box-shadow:0 4px 12px -3px rgba(16,185,129,.6);
+}
+.live-dot{
+  width:7px;height:7px;border-radius:50%;background:#ffffff;
+  animation:pulseGreen 1.6s infinite;
+}
+@keyframes pulseGreen{
+  0%{box-shadow:0 0 0 0 rgba(255,255,255,.8)}
+  70%{box-shadow:0 0 0 7px rgba(255,255,255,0)}
+  100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}
+}
+
+.tab-bar{
+  position:fixed;bottom:0;inset-inline:0;z-index:60;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-top:1px solid var(--line);
+  padding-bottom:var(--safe-bottom);
+  display:none;
+}
+.tab-bar.show{display:block}
+.tab-bar-inner{
+  max-width:520px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4, 1fr);
+  padding:6px 6px 8px;
+}
+@media(min-width:720px){.tab-bar-inner{max-width:760px}}
+.tab-btn{
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:8px 4px;border-radius:12px;
+  font-size:10.5px;font-weight:600;color:var(--muted);
+  transition:.18s;
+}
+.tab-btn svg{width:22px;height:22px;stroke-width:1.9}
+.tab-btn.active{color:var(--brand)}
+.tab-btn.active svg{stroke:var(--brand)}
+.tab-btn:active{transform:scale(.94)}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:15px 22px;border-radius:14px;
+  font-weight:700;font-size:15.5px;
+  transition:transform .12s ease, box-shadow .2s, background .2s;
+  min-height:52px;user-select:none;
+}
+.btn:active{transform:scale(.97)}
+.btn-primary{
+  background:linear-gradient(135deg,var(--brand),var(--brand-2));
+  color:#ffffff;
+  box-shadow:0 10px 22px -12px rgba(23,86,141,.75);
+}
+.btn-primary:disabled{
+  background:#e0e5ee;color:#98a1b3;
+  box-shadow:none;cursor:not-allowed;transform:none;
+}
+.btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line-2)}
+.btn-ghost:active{background:#f5f7fb}
+.btn-block{display:flex;width:100%}
+.btn-sm{padding:10px 16px;font-size:14px;min-height:42px;border-radius:12px}
+
+.pill{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:4px 10px;border-radius:99px;
+  font-size:11.5px;font-weight:700;
+  background:var(--brand-soft);color:var(--brand);
+}
+.pill.ok{background:var(--ok-soft);color:#0a7351}
+
+.card{
+  background:var(--card);border-radius:var(--r-lg);
+  padding:20px;box-shadow:var(--shadow-md);
+}
+.card + .card{margin-top:14px}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.card-header h3{font-size:15.5px;color:var(--ink)}
+
+/* ==================== الرئيسية ==================== */
+.home-hero{
+  text-align:center;
+  padding:24px 8px 10px;
+}
+.hero-logo{
+  width:86px;height:86px;
+  margin:0 auto 22px;
+  border-radius:26px;
+  background:linear-gradient(135deg,var(--brand-deep),var(--brand-2));
+  color:#fff;
+  display:grid;place-items:center;
+  font-size:40px;line-height:1;
+  box-shadow:0 22px 44px -20px rgba(11,51,86,.85);
+  position:relative;
+}
+.hero-logo::after{
+  content:"";position:absolute;inset:-7px;
+  border-radius:32px;
+  border:2px dashed #cfe3f2;
+  animation:rotateSlow 24s linear infinite;
+}
+@keyframes rotateSlow{to{transform:rotate(360deg)}}
+.home-hero .hero-university{
+  font-size:12px;
+  color:var(--brand);
+  font-weight:700;
+  letter-spacing:.5px;
+  margin-bottom:10px;
+  padding:5px 14px;
+  background:var(--brand-soft);
+  border-radius:99px;
+  display:inline-block;
+}
+.home-hero h1{
+  font-size:24px;
+  letter-spacing:-.5px;
+  color:var(--ink);
+  margin-bottom:12px;
+}
+.home-hero .hero-tagline{
+  font-size:14px;
+  color:var(--muted);
+  max-width:380px;
+  margin:0 auto 26px;
+  line-height:1.75;
+}
+.hero-actions{
+  display:flex;flex-direction:column;gap:10px;
+  max-width:340px;margin:0 auto;
+}
+@media(min-width:600px){
+  .hero-actions{
+    flex-direction:row;
+    max-width:460px;
+  }
+  .hero-actions .btn{flex:1}
+}
+
+.home-section{margin-top:36px}
+.section-title{
+  font-size:18px;font-weight:800;
+  color:var(--ink);margin-bottom:6px;
+}
+.section-subtitle{
+  font-size:13.5px;color:var(--muted);
+  margin-bottom:18px;line-height:1.65;
+}
+
+.steps-list{display:flex;flex-direction:column;gap:12px}
+.step-card{
+  display:flex;gap:14px;
+  padding:18px;
+  background:#fff;
+  border-radius:var(--r-md);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow-sm);
+  transition:.18s;
+}
+.step-card:active{transform:scale(.99)}
+.step-number{
+  width:38px;height:38px;
+  border-radius:12px;
+  flex-shrink:0;
+  background:linear-gradient(135deg,var(--brand-deep),var(--brand));
+  color:#fff;
+  display:grid;place-items:center;
+  font-weight:800;font-size:15px;
+  box-shadow:0 6px 14px -6px rgba(11,51,86,.6);
+}
+.step-body{flex:1;min-width:0}
+.step-body h3{
+  font-size:14.5px;font-weight:700;
+  color:var(--ink);margin-bottom:5px;
+}
+.step-body p{
+  font-size:13px;color:var(--muted);
+  line-height:1.7;
+}
+
+.features-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+@media(min-width:720px){
+  .features-grid{grid-template-columns:repeat(4,1fr)}
+}
+.feature-card{
+  padding:16px;
+  background:#fff;
+  border-radius:var(--r-md);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow-sm);
+  transition:.18s;
+}
+.feature-card:active{transform:scale(.98)}
+.feature-icon{
+  width:42px;height:42px;
+  border-radius:13px;
+  display:grid;place-items:center;
+  font-size:20px;
+  margin-bottom:12px;
+  background:var(--brand-soft);
+}
+.feature-card h3{
+  font-size:14px;font-weight:700;
+  color:var(--ink);margin-bottom:6px;
+  line-height:1.4;
+}
+.feature-card p{
+  font-size:12.5px;color:var(--muted);
+  line-height:1.6;
+}
+
+.quick-access{
+  margin-top:34px;
+  padding:24px 20px;
+  background:linear-gradient(135deg,#f0f7fc 0%,#e4eef7 100%);
+  border-radius:var(--r-lg);
+  border:1px solid #d9e6f2;
+}
+.quick-access h2{
+  font-size:16px;font-weight:800;
+  color:var(--ink);
+  margin-bottom:16px;
+  text-align:center;
+}
+.quick-actions{
+  display:flex;flex-direction:column;gap:10px;
+}
+.quick-card{
+  display:flex;align-items:center;gap:14px;
+  padding:16px;
+  background:#fff;
+  border-radius:16px;
+  border:1px solid var(--line);
+  text-align:right;
+  transition:.15s;
+  cursor:pointer;
+  width:100%;
+  font-family:inherit;
+  color:var(--ink);
+}
+.quick-card:active{transform:scale(.98)}
+.quick-card .quick-icon{
+  width:48px;height:48px;
+  border-radius:14px;
+  flex-shrink:0;
+  display:grid;place-items:center;
+  font-size:22px;
+  background:var(--brand-soft);
+}
+.quick-card .quick-body{flex:1;min-width:0}
+.quick-card .quick-body b{
+  display:block;
+  font-size:14.5px;font-weight:700;
+  color:var(--ink);margin-bottom:3px;
+}
+.quick-card .quick-body span{
+  font-size:12px;color:var(--muted);
+  display:block;
+}
+.quick-card .quick-arrow{
+  color:var(--muted);
+  font-size:18px;
+  flex-shrink:0;
+}
+
+.home-footer{
+  margin-top:36px;
+  padding:22px 16px;
+  text-align:center;
+  border-top:1px dashed var(--line-2);
+}
+.home-footer .footer-logo{
+  width:44px;height:44px;
+  border-radius:14px;
+  background:linear-gradient(135deg,var(--brand-deep),var(--brand));
+  color:#fff;
+  display:grid;place-items:center;
+  font-size:20px;
+  margin:0 auto 12px;
+  box-shadow:0 10px 20px -10px rgba(11,51,86,.7);
+}
+.home-footer p{
+  font-size:12.5px;color:var(--muted);
+  line-height:1.75;
+}
+.home-footer b{color:var(--ink);font-weight:700}
+
+/* ==================== شاشة الدخول ==================== */
+#view-join{
+  display:none;min-height:100dvh;
+  padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);
+}
+#view-join.active{display:flex;align-items:center;justify-content:center}
+.join-wrap{width:100%;max-width:420px;padding:28px 22px;margin:0 auto}
+
+.join-logo{
+  width:68px;height:68px;border-radius:20px;margin:0 auto 20px;
+  background:linear-gradient(135deg,var(--brand-deep),var(--brand-2));
+  color:#fff;display:grid;place-items:center;
+  font-size:30px;font-weight:800;
+  box-shadow:0 16px 32px -16px rgba(11,51,86,.7);
+}
+.join-univ{
+  text-align:center;
+  font-size:12px;font-weight:700;
+  color:var(--brand);
+  margin-bottom:6px;
+  letter-spacing:.3px;
+}
+.join-title{text-align:center;margin-bottom:8px;color:var(--ink)}
+.join-desc{
+  text-align:center;font-size:14px;color:var(--muted);
+  margin-bottom:26px;line-height:1.65;
+}
+.join-steps{
+  display:flex;align-items:center;justify-content:center;
+  gap:6px;margin-bottom:22px;
+}
+.join-step{
+  display:flex;align-items:center;gap:5px;
+  font-size:11px;color:var(--muted);font-weight:600;
+}
+.join-step .num{
+  width:18px;height:18px;border-radius:50%;
+  background:#e6eaf1;color:var(--muted);
+  display:grid;place-items:center;font-size:10px;font-weight:800;
+}
+.join-step.active .num{background:var(--brand);color:#fff}
+.join-step.active{color:var(--brand)}
+.join-step-line{width:14px;height:1px;background:var(--line-2)}
+
+.code-box{
+  display:flex;gap:8px;justify-content:center;
+  direction:ltr;margin-bottom:12px;
+}
+.code-box input{
+  width:48px;height:58px;text-align:center;
+  font-size:22px;font-weight:800;
+  border:1.5px solid var(--line-2);border-radius:14px;
+  background:#fbfcfe;outline:none;color:var(--brand);
+  transition:.15s;caret-color:var(--brand);
+}
+.code-box input:focus{
+  border-color:var(--brand);background:#fff;
+  box-shadow:0 0 0 4px rgba(23,86,141,.12);
+  transform:translateY(-2px);
+}
+.code-box input.filled{border-color:#b8d5eb;background:#f2f8fc}
+.code-box.shake{animation:shake .4s}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%{transform:translateX(-8px)}
+  40%{transform:translateX(8px)}
+  60%{transform:translateX(-5px)}
+  80%{transform:translateX(5px)}
+}
+.code-hint{
+  text-align:center;font-size:12.5px;color:var(--muted);
+  margin-bottom:20px;min-height:18px;font-weight:500;
+}
+.code-hint.error{color:var(--danger);font-weight:700}
+.code-hint b{color:var(--brand);font-family:monospace;letter-spacing:2px;font-size:13px}
+
+.divider{
+  display:flex;align-items:center;gap:12px;
+  color:var(--muted);font-size:12.5px;
+  margin:22px 0;font-weight:500;
+}
+.divider::before,.divider::after{
+  content:"";flex:1;height:1px;background:var(--line);
+}
+.qr-block{
+  text-align:center;padding:16px;
+  background:#fbfcfe;border:1px dashed var(--line-2);
+  border-radius:16px;
+}
+.qr-mini{
+  display:grid;gap:2px;width:104px;height:104px;
+  padding:9px;margin:0 auto 10px;
+  background:#fff;border:1px solid var(--line-2);
+  border-radius:14px;
+}
+.qr-mini i{border-radius:1.5px;background:transparent}
+.qr-mini i.on{background:var(--brand-deep)}
+.qr-note{font-size:12px;color:var(--muted);line-height:1.6}
+
+.trust{
+  display:flex;align-items:flex-start;gap:9px;
+  margin-top:20px;padding:12px 14px;
+  background:#f8fafd;border-radius:12px;
+  font-size:12px;color:var(--ink-2);
+  line-height:1.65;border:1px solid var(--line);
+}
+.trust .lock{flex-shrink:0;font-size:14px;line-height:1.4}
+
+/* ==================== التحميل ==================== */
+#view-loading{
+  display:none;min-height:100dvh;
+  padding-top:var(--safe-top);padding-bottom:var(--safe-bottom);
+}
+#view-loading.active{
+  display:flex;align-items:center;justify-content:center;
+  background:var(--bg);
+}
+.loader-wrap{width:100%;max-width:340px;padding:32px 24px;text-align:center}
+.spinner{width:78px;height:78px;margin:0 auto 24px;position:relative}
+.spinner svg{width:100%;height:100%;transform:rotate(-90deg)}
+.spinner .track{fill:none;stroke:#e2e8f1;stroke-width:5.5}
+.spinner .arc{
+  fill:none;stroke:url(#loaderGrad);stroke-width:5.5;stroke-linecap:round;
+  stroke-dasharray:264;stroke-dashoffset:264;
+  animation:spin 1.5s cubic-bezier(.45,.05,.55,.95) infinite;
+}
+@keyframes spin{
+  0%{stroke-dashoffset:264;transform:rotate(0deg)}
+  55%{stroke-dashoffset:66}
+  100%{stroke-dashoffset:264;transform:rotate(360deg)}
+}
+.spinner .center{
+  position:absolute;inset:0;display:grid;place-items:center;
+  font-size:22px;font-weight:800;color:var(--brand);
+}
+.loader-title{font-size:17px;font-weight:800;margin-bottom:6px;color:var(--ink)}
+.loader-step{
+  font-size:13.5px;color:var(--muted);
+  min-height:20px;font-weight:500;transition:.3s;
+}
+.loader-bar{
+  height:4px;background:#e2e8f1;border-radius:99px;
+  margin-top:22px;overflow:hidden;
+}
+.loader-bar span{
+  display:block;height:100%;width:0;
+  background:linear-gradient(90deg,var(--brand),var(--brand-2));
+  border-radius:99px;transition:width .4s ease;
+}
+.loader-code{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:20px;padding:8px 14px;border-radius:11px;
+  background:#fff;border:1px solid var(--line-2);
+  font-size:12.5px;color:var(--ink-2);
+}
+.loader-code b{
+  font-family:monospace;letter-spacing:3px;
+  color:var(--brand);font-size:14px;direction:ltr;
+}
+
+/* ==================== المحاضرة ==================== */
+.lecture-card{
+  background:linear-gradient(135deg,var(--brand-deep) 0%,var(--brand) 100%);
+  color:#ffffff;
+  border-radius:var(--r-lg);
+  padding:18px 20px;margin-bottom:14px;
+  position:relative;overflow:hidden;
+  box-shadow:0 16px 34px -20px rgba(11,51,86,.65);
+}
+.lecture-card::after{
+  content:"";position:absolute;top:-30%;inset-inline-end:-20%;
+  width:180px;height:180px;border-radius:50%;
+  background:rgba(255,255,255,.08);
+}
+.lecture-card .lc-top{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:10px;position:relative;
+}
+.lecture-card .lc-live{
+  display:inline-flex;align-items:center;gap:6px;
+  background:linear-gradient(135deg,var(--live),var(--live-deep));
+  padding:5px 11px;border-radius:99px;
+  font-size:11.5px;font-weight:800;
+  color:#ffffff;
+  box-shadow:0 4px 12px -3px rgba(16,185,129,.7);
+}
+.lecture-card .lc-live .dot{
+  width:6px;height:6px;border-radius:50%;background:#ffffff;
+  animation:pulseGreen 1.6s infinite;
+}
+.lecture-card .lc-timer{
+  margin-inline-start:auto;
+  font-family:monospace;font-size:13px;
+  color:rgba(255,255,255,.92);
+  direction:ltr;
+}
+.lecture-card h3{
+  font-size:16px;font-weight:800;
+  color:#ffffff;
+  margin-bottom:4px;position:relative;
+}
+.lecture-card .lc-meta{
+  font-size:12.5px;
+  color:rgba(255,255,255,.85);
+  position:relative;
+}
+
+.code-strip{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 14px 12px 16px;border-radius:14px;
+  background:#fff;box-shadow:var(--shadow-sm);
+  border:1px solid var(--line);margin-bottom:18px;
+}
+.code-strip .cs-label{
+  font-size:12.5px;color:var(--muted);font-weight:600;
+  flex-shrink:0;
+}
+.code-strip .cs-value{
+  font-family:monospace;font-size:16px;font-weight:800;
+  letter-spacing:4px;color:var(--brand-deep);
+  direction:ltr;margin-inline-start:auto;
+}
+.cs-copy{
+  width:38px;height:38px;
+  border-radius:11px;
+  background:var(--brand-soft);
+  color:var(--brand-deep);
+  display:grid;place-items:center;
+  font-size:15px;
+  transition:.18s;
+  flex-shrink:0;
+  border:1px solid transparent;
+  position:relative;
+}
+.cs-copy:hover{background:#d4e6f5}
+.cs-copy:active{transform:scale(.9)}
+.cs-copy.copied{
+  background:var(--live-soft);
+  color:var(--ok);
+  border-color:#a7e0c7;
+  animation:copyPop .35s cubic-bezier(.3,1.5,.5,1);
+}
+@keyframes copyPop{
+  0%{transform:scale(.8)}
+  60%{transform:scale(1.1)}
+  100%{transform:scale(1)}
+}
+
+.state{animation:stateIn .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes stateIn{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:none}
+}
+
+.waiting-card{
+  background:#fff;border-radius:var(--r-lg);
+  padding:36px 24px;text-align:center;
+  box-shadow:var(--shadow-md);
+  position:relative;overflow:hidden;
+}
+.waiting-visual{
+  position:relative;width:96px;height:96px;
+  margin:0 auto 20px;
+}
+.waiting-visual::before,
+.waiting-visual::after{
+  content:"";position:absolute;inset:0;
+  border-radius:50%;border:2px solid #d6e6f2;
+  animation:ripple 2.4s cubic-bezier(.2,.6,.3,1) infinite;
+}
+.waiting-visual::after{animation-delay:1.2s}
+@keyframes ripple{
+  0%{transform:scale(.5);opacity:.8}
+  100%{transform:scale(1.4);opacity:0}
+}
+.waiting-icon{
+  position:absolute;inset:0;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,#e8f1f9,#e0f2f4);
+  border-radius:50%;font-size:38px;z-index:1;
+}
+.waiting-card h3{font-size:17px;margin-bottom:8px;color:var(--ink)}
+.waiting-card p{
+  font-size:13.5px;color:var(--muted);
+  max-width:280px;margin:0 auto 22px;
+  line-height:1.65;
+}
+.waiting-dots{
+  display:inline-flex;gap:5px;margin-bottom:22px;
+}
+.waiting-dots span{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--brand);opacity:.3;
+  animation:dotFade 1.4s infinite;
+}
+.waiting-dots span:nth-child(2){animation-delay:.2s}
+.waiting-dots span:nth-child(3){animation-delay:.4s}
+@keyframes dotFade{
+  0%,100%{opacity:.25;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.15)}
+}
+.simulate-hint{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:16px;font-size:11.5px;color:var(--muted);
+  font-weight:500;
+}
+.simulate-hint::before,
+.simulate-hint::after{
+  content:"";width:20px;height:1px;background:var(--line-2);
+}
+
+.board-card{
+  background:#fff;border-radius:var(--r-lg);
+  box-shadow:var(--shadow-md);
+  overflow:hidden;position:relative;
+}
+.board-head{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 18px 0;
+}
+.board-tag{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 12px;border-radius:99px;
+  font-size:11.5px;font-weight:800;
+  background:var(--brand-soft);color:var(--brand-deep);
+}
+.board-tag.image{background:#e0f2f4;color:#0d5e6b}
+.board-tag.video{background:#e5edf9;color:#1e3a78}
+.board-tag.file{background:var(--warn-soft);color:#8a5500}
+.board-tag.announcement{background:var(--ok-soft);color:#0a6b4d}
+.board-time{
+  font-size:11.5px;color:var(--muted);
+  margin-inline-start:auto;font-weight:600;
+}
+
+.board-media{padding:14px 18px 0}
+.board-media:empty{display:none;padding:0}
+
+.media-image{
+  border-radius:14px;overflow:hidden;
+  border:1px solid var(--line);
+  background:#fbfcfe;
+}
+.media-image img,
+.media-image svg{width:100%;display:block}
+.media-caption{
+  padding:10px 14px;font-size:12px;color:var(--ink-2);
+  background:#fbfcfe;border-top:1px solid var(--line);
+  display:flex;align-items:center;gap:7px;
+}
+
+.media-video{
+  border-radius:14px;overflow:hidden;
+  position:relative;cursor:pointer;
+  background:var(--brand-deep);
+  aspect-ratio:16/9;
+}
+.media-video .mv-thumb{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#0b3356 0%,#17568d 50%,#3d8bc7 100%);
+  opacity:.95;
+}
+.media-video .mv-thumb::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(400px 200px at 20% 30%, rgba(255,255,255,.14), transparent 70%),
+    radial-gradient(300px 200px at 80% 70%, rgba(61,139,199,.22), transparent 70%);
+}
+.media-video .mv-play{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:64px;height:64px;border-radius:50%;
+  background:rgba(255,255,255,.96);
+  display:grid;place-items:center;
+  box-shadow:0 12px 30px -8px rgba(0,0,0,.35);
+  transition:.2s;
+  color:var(--brand-deep);font-size:24px;
+  padding-inline-start:4px;
+}
+.media-video:hover .mv-play{transform:translate(-50%,-50%) scale(1.08)}
+.media-video .mv-info{
+  position:absolute;bottom:0;inset-inline:0;
+  padding:12px 14px;
+  display:flex;align-items:center;gap:10px;
+  background:linear-gradient(to top, rgba(11,51,86,.88), transparent);
+  color:#ffffff;
+}
+.media-video .mv-info b{
+  font-size:13px;font-weight:700;
+  color:#ffffff;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.media-video .mv-duration{
+  margin-inline-start:auto;
+  font-family:monospace;font-size:11.5px;
+  background:rgba(0,0,0,.55);
+  color:#ffffff;
+  padding:3px 8px;border-radius:6px;
+  font-weight:700;
+}
+
+.media-file{
+  display:flex;align-items:center;gap:12px;
+  padding:14px;border-radius:14px;
+  background:#fbfcfe;border:1px solid var(--line);
+}
+.media-file-icon{
+  width:48px;height:48px;flex-shrink:0;
+  border-radius:12px;
+  display:grid;place-items:center;
+  font-size:13px;font-weight:800;
+  background:#fff;border:1px solid var(--line-2);
+  color:#b42318;letter-spacing:.5px;
+}
+.media-file-info{flex:1;min-width:0}
+.media-file-info b{
+  display:block;font-size:13.5px;font-weight:700;
+  color:var(--ink);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  margin-bottom:2px;
+}
+.media-file-info span{font-size:11.5px;color:var(--muted)}
+.media-file-actions{display:flex;gap:6px;flex-shrink:0}
+.file-btn{
+  padding:8px 12px;border-radius:10px;
+  font-size:12px;font-weight:700;
+  min-height:0;min-width:0;
+  display:inline-flex;align-items:center;gap:5px;
+  transition:.15s;
+}
+.file-btn.read{background:var(--brand);color:#ffffff}
+.file-btn.read:active{transform:scale(.96)}
+.file-btn.download{background:#fff;color:var(--ink);border:1px solid var(--line-2)}
+.file-btn.download:active{background:#f5f7fb}
+@media(max-width:400px){
+  .media-file-actions{flex-direction:column}
+  .file-btn{width:100%;justify-content:center}
+}
+
+.board-content{padding:16px 18px 0}
+.board-content h3{
+  font-size:17px;font-weight:700;
+  line-height:1.65;color:var(--ink);
+  margin-bottom:8px;
+}
+.board-content p{
+  font-size:14px;color:var(--ink-2);
+  line-height:1.7;
+}
+.board-content p:empty{display:none}
+
+.board-options{padding:16px 18px 0}
+.board-options:empty{display:none;padding:0}
+.options-list{display:flex;flex-direction:column;gap:10px}
+.option{
+  display:flex;align-items:center;gap:12px;
+  padding:15px 16px;
+  border:1.5px solid var(--line-2);
+  border-radius:14px;background:#fff;
+  font-size:15px;font-weight:600;
+  text-align:right;transition:.15s;
+  min-height:56px;color:var(--ink);
+  width:100%;
+}
+.option:active{transform:scale(.99)}
+.option .key{
+  width:32px;height:32px;flex-shrink:0;
+  border-radius:9px;display:grid;place-items:center;
+  font-size:13.5px;font-weight:800;
+  background:#e8ecf3;color:var(--ink-2);
+  transition:.15s;
+}
+.option.selected{
+  border-color:var(--brand);background:var(--brand-soft);
+  box-shadow:0 0 0 3px rgba(23,86,141,.10);
+}
+.option.selected .key{background:var(--brand);color:#ffffff}
+
+.board-actions{padding:18px 18px 20px}
+.board-actions:empty{display:none;padding:0}
+
+.preview-strip{
+  margin-top:14px;padding:14px;
+  border-radius:16px;background:#fbfcfe;
+  border:1px dashed var(--line-2);
+}
+.preview-label{
+  display:flex;align-items:center;gap:6px;
+  font-size:11.5px;color:var(--muted);
+  font-weight:700;margin-bottom:10px;
+  letter-spacing:.3px;
+}
+.preview-label .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--warn);
+  animation:pulse2 1.6s infinite;
+}
+@keyframes pulse2{0%{opacity:1}50%{opacity:.4}100%{opacity:1}}
+.preview-tabs{
+  display:flex;gap:6px;overflow-x:auto;
+  padding-bottom:2px;scrollbar-width:none;
+}
+.preview-tabs::-webkit-scrollbar{display:none}
+.preview-tab{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:9px 14px;border-radius:99px;
+  font-size:12.5px;font-weight:700;
+  color:var(--ink-2);background:#fff;
+  border:1px solid var(--line);
+  white-space:nowrap;transition:.18s;
+  flex-shrink:0;
+}
+.preview-tab.active{
+  background:var(--brand-deep);color:#ffffff;
+  border-color:var(--brand-deep);
+}
+.preview-tab .em{font-size:14px;line-height:1}
+
+.submitted-card{
+  background:#fff;border-radius:var(--r-lg);
+  padding:40px 24px 34px;text-align:center;
+  box-shadow:var(--shadow-md);
+}
+.submitted-icon{
+  width:80px;height:80px;margin:0 auto 22px;
+  border-radius:50%;background:var(--ok-soft);
+  display:grid;place-items:center;position:relative;
+}
+.submitted-icon::after{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  border:2px solid var(--ok-soft);
+  animation:successRing 1.6s ease-out infinite;
+}
+@keyframes successRing{
+  0%{transform:scale(1);opacity:.8}
+  100%{transform:scale(1.5);opacity:0}
+}
+.submitted-icon .check{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--ok);color:#ffffff;
+  display:grid;place-items:center;
+  font-size:24px;font-weight:800;
+  animation:pop .5s cubic-bezier(.3,1.5,.5,1);
+}
+@keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
+.submitted-card h3{font-size:18px;margin-bottom:8px;color:var(--ink)}
+.submitted-card p{
+  font-size:13.5px;color:var(--muted);
+  max-width:280px;margin:0 auto 24px;
+  line-height:1.65;
+}
+.waiting-next{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:11px 20px;border-radius:99px;
+  background:#f8fafd;border:1px solid var(--line);
+  font-size:12.5px;color:var(--ink-2);font-weight:600;
+}
+.waiting-next .spinner-mini{
+  width:14px;height:14px;border-radius:50%;
+  border:2px solid #d6e6f2;
+  border-top-color:var(--brand);
+  animation:spin2 .8s linear infinite;
+}
+@keyframes spin2{to{transform:rotate(360deg)}}
+
+.ask-card .card-header{
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:14px;
+}
+.ask-card .card-header h3{font-size:15.5px;color:var(--ink)}
+
+.ask-status{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:4px 10px;border-radius:99px;
+  font-size:11px;font-weight:800;
+  margin-inline-start:auto;
+  transition:.2s;
+}
+.ask-status.open{background:var(--ok-soft);color:#0a6b4d}
+.ask-status.closed{background:#f0f2f7;color:#6b7280}
+.ask-status .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:currentColor;
+}
+.ask-status.open .dot{animation:pulse2 1.6s infinite}
+
+.ask-open textarea{
+  width:100%;min-height:80px;
+  padding:13px 15px;
+  border:1.5px solid var(--line-2);
+  border-radius:14px;background:#fbfcfe;
+  outline:none;resize:vertical;
+  font-size:15px;line-height:1.6;
+  color:var(--ink);
+  transition:.15s;
+}
+.ask-open textarea:focus{
+  border-color:var(--brand);background:#fff;
+  box-shadow:0 0 0 4px rgba(23,86,141,.09);
+}
+.ask-open textarea::placeholder{color:var(--muted)}
+.ask-open .btn{margin-top:10px}
+
+.ask-closed{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:18px 16px;border-radius:14px;
+  background:#f8fafd;border:1px dashed var(--line-2);
+  animation:stateIn .35s ease;
+}
+.ask-closed .lock-icon{
+  width:40px;height:40px;flex-shrink:0;
+  border-radius:12px;background:#fff;
+  border:1px solid var(--line);
+  display:grid;place-items:center;
+  font-size:18px;
+}
+.ask-closed .closed-text b{
+  display:block;font-size:14px;font-weight:700;
+  color:var(--ink);margin-bottom:3px;
+}
+.ask-closed .closed-text span{
+  font-size:12.5px;color:var(--muted);
+  line-height:1.6;
+}
+
+.ask-demo{
+  margin-top:14px;padding-top:14px;
+  border-top:1px dashed var(--line-2);
+  display:flex;align-items:center;gap:8px;
+  flex-wrap:wrap;
+}
+.ask-demo-label{
+  font-size:11px;color:var(--muted);
+  font-weight:700;margin-inline-end:4px;
+}
+.ask-demo-btn{
+  padding:6px 12px;border-radius:99px;
+  font-size:11.5px;font-weight:700;
+  background:#fff;border:1px solid var(--line);
+  color:var(--ink-2);
+  transition:.15s;
+}
+.ask-demo-btn.active{
+  background:var(--brand-deep);
+  color:#ffffff;
+  border-color:var(--brand-deep);
+}
+
+.qfrom{
+  padding:12px 14px;border-radius:12px;
+  background:#fbfcfe;border:1px solid var(--line);
+  margin-bottom:9px;
+}
+.qfrom .qh{
+  display:flex;justify-content:space-between;
+  font-size:11.5px;color:var(--muted);
+  margin-bottom:5px;font-weight:600;
+}
+.qfrom p{font-size:14px;color:var(--ink);line-height:1.6}
+
+#view-profile-login{
+  display:none;min-height:100dvh;
+}
+#view-profile-login.active{display:flex;flex-direction:column}
+
+.profile-login-wrap{
+  flex:1;
+  width:100%;max-width:440px;
+  margin:0 auto;
+  padding:24px 20px 130px;
+}
+
+.login-card{
+  background:#fff;
+  border-radius:var(--r-lg);
+  padding:32px 24px 28px;
+  box-shadow:var(--shadow-md);
+  text-align:center;
+}
+
+.login-icon-wrap{
+  width:76px;height:76px;
+  margin:0 auto 18px;
+  border-radius:22px;
+  background:linear-gradient(135deg,#e8f1f9,#d6e9f5);
+  display:grid;place-items:center;
+  position:relative;
+}
+.login-icon-wrap::after{
+  content:"";position:absolute;inset:-6px;
+  border-radius:26px;
+  border:2px dashed #cfe3f2;
+  animation:rotateSlow 20s linear infinite;
+}
+.login-icon{font-size:34px;line-height:1}
+
+.login-title{
+  font-size:20px;font-weight:800;
+  color:var(--ink);
+  margin-bottom:8px;
+}
+.login-desc{
+  font-size:13.5px;
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:26px;
+  max-width:320px;
+  margin-inline:auto;
+}
+
+.login-field{
+  text-align:right;
+  margin-bottom:18px;
+}
+.login-field > label{
+  display:flex;align-items:center;gap:6px;
+  font-size:13px;
+  font-weight:700;
+  color:var(--ink);
+  margin-bottom:10px;
+}
+.login-field > label .lbl-num{
+  width:18px;height:18px;border-radius:50%;
+  background:var(--brand-soft);color:var(--brand-deep);
+  display:grid;place-items:center;
+  font-size:10px;font-weight:800;
+}
+
+.login-input{
+  width:100%;
+  padding:15px 18px;
+  border:1.5px solid var(--line-2);
+  border-radius:14px;
+  background:#fbfcfe;
+  outline:none;
+  font-size:17px;
+  color:var(--ink);
+  font-weight:700;
+  transition:.15s;
+  font-family:monospace;
+  direction:ltr;
+  text-align:center;
+  letter-spacing:2px;
+}
+.login-input:focus{
+  border-color:var(--brand);
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(23,86,141,.12);
+}
+.login-input::placeholder{
+  color:var(--muted);
+  font-weight:400;
+  letter-spacing:0;
+  font-family:'Tajawal',sans-serif;
+  font-size:14.5px;
+}
+.login-input.filled{
+  border-color:#b8d5eb;
+  background:#f2f8fc;
+}
+.login-input.shake{animation:shake .4s}
+
+#uniId{
+  font-size:18px;
+  letter-spacing:3px;
+}
+
+.secret-wrap{
+  position:relative;
+}
+#secretCode{
+  font-size:19px;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  padding-inline-end:52px;
+}
+.secret-toggle{
+  position:absolute;
+  top:50%;
+  inset-inline-end:12px;
+  transform:translateY(-50%);
+  width:36px;height:36px;
+  border-radius:10px;
+  display:grid;place-items:center;
+  color:var(--muted);
+  font-size:16px;
+  transition:.15s;
+}
+.secret-toggle:hover{background:#eef2f7;color:var(--ink)}
+.secret-toggle:active{transform:translateY(-50%) scale(.92)}
+
+.secret-progress{
+  display:flex;gap:4px;
+  margin-top:10px;
+  padding-inline:4px;
+}
+.secret-progress span{
+  flex:1;
+  height:3px;
+  border-radius:99px;
+  background:#e6eaf1;
+  transition:.2s;
+}
+.secret-progress span.filled{
+  background:var(--brand);
+}
+
+.login-hint{
+  text-align:center;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:20px;
+  font-weight:500;
+  min-height:18px;
+  line-height:1.6;
+}
+.login-hint.error{color:var(--danger);font-weight:700}
+.login-hint b{
+  color:var(--brand-deep);
+  font-family:monospace;
+  letter-spacing:1.5px;
+  font-size:12.5px;
+}
+
+.login-privacy{
+  display:flex;align-items:flex-start;gap:9px;
+  margin-top:20px;padding:12px 14px;
+  background:#f8fafd;border-radius:12px;
+  font-size:11.5px;color:var(--ink-2);
+  line-height:1.65;border:1px solid var(--line);
+  text-align:right;
+}
+.login-privacy .lock{
+  flex-shrink:0;font-size:14px;line-height:1.4;
+}
+
+/* ==================== الملف الأكاديمي ==================== */
+.profile-card{
+  background:linear-gradient(135deg,var(--brand-deep) 0%,var(--brand) 100%);
+  color:#ffffff;
+  border-radius:var(--r-lg);
+  padding:24px 22px;position:relative;overflow:hidden;
+  margin-bottom:18px;
+  box-shadow:0 16px 34px -20px rgba(11,51,86,.65);
+}
+.profile-card::after{
+  content:"";position:absolute;bottom:-40%;inset-inline-start:-15%;
+  width:200px;height:200px;border-radius:50%;
+  background:rgba(255,255,255,.06);
+}
+.profile-row{display:flex;align-items:center;gap:16px;position:relative}
+.profile-avatar{
+  width:60px;height:60px;border-radius:18px;flex-shrink:0;
+  background:rgba(255,255,255,.20);
+  backdrop-filter:blur(10px);
+  display:grid;place-items:center;
+  font-size:24px;font-weight:800;
+  color:#ffffff;
+  border:1.5px solid rgba(255,255,255,.28);
+}
+.profile-info{flex:1;min-width:0}
+.profile-info h2{
+  font-size:18px;font-weight:800;margin-bottom:3px;
+  color:#ffffff;
+}
+.profile-info p{
+  font-size:12.5px;color:rgba(255,255,255,.85);
+}
+.profile-score{
+  position:relative;margin-top:18px;padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.18);
+  display:flex;align-items:center;gap:16px;
+}
+.profile-score .ps-num{
+  font-size:32px;font-weight:800;line-height:1;letter-spacing:-1px;
+  color:#ffffff;
+}
+.profile-score .ps-num small{
+  font-size:14px;color:rgba(255,255,255,.75);
+  font-weight:600;
+}
+.profile-score .ps-label{
+  font-size:12.5px;color:rgba(255,255,255,.85);
+  margin-top:2px;
+}
+.profile-score .ps-bar{
+  flex:1;height:6px;border-radius:99px;
+  background:rgba(255,255,255,.22);overflow:hidden;position:relative;
+}
+.profile-score .ps-bar span{
+  display:block;height:100%;width:0;background:#ffffff;
+  border-radius:99px;transition:width 1s cubic-bezier(.2,.8,.2,1);
+}
+
+.stats-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:12px;margin-bottom:18px;
+}
+.stat-box{
+  background:#fff;border-radius:var(--r-md);
+  padding:16px;box-shadow:var(--shadow-sm);
+  border:1px solid var(--line);
+}
+.stat-box .sb-icon{
+  width:34px;height:34px;border-radius:10px;
+  display:grid;place-items:center;
+  font-size:16px;margin-bottom:10px;
+  background:var(--brand-soft);
+}
+.stat-box .sb-num{
+  font-size:22px;font-weight:800;line-height:1.1;
+  letter-spacing:-.5px;color:var(--ink);
+}
+.stat-box .sb-num small{
+  font-size:13px;color:var(--muted);font-weight:600;
+}
+.stat-box .sb-label{
+  font-size:12px;color:var(--muted);
+  margin-top:4px;font-weight:500;
+}
+
+.tabs-scroll{
+  display:flex;gap:6px;overflow-x:auto;
+  margin-bottom:16px;padding-bottom:2px;
+  scrollbar-width:none;
+}
+.tabs-scroll::-webkit-scrollbar{display:none}
+.tab-pill{
+  padding:9px 16px;border-radius:99px;
+  font-size:13.5px;font-weight:700;
+  color:var(--ink-2);background:#fff;
+  border:1px solid var(--line);
+  white-space:nowrap;transition:.18s;
+}
+.tab-pill.active{
+  background:var(--brand-deep);color:#ffffff;
+  border-color:var(--brand-deep);
+}
+.tab-pane{display:none}
+.tab-pane.active{display:block;animation:viewIn .3s ease}
+
+.course-item{
+  display:flex;align-items:center;gap:14px;
+  padding:16px;border-radius:var(--r-md);
+  background:#fff;margin-bottom:10px;
+  border:1px solid var(--line);transition:.18s;
+}
+.course-item:active{transform:scale(.99)}
+.course-icon{
+  width:44px;height:44px;border-radius:13px;
+  flex-shrink:0;display:grid;place-items:center;
+  font-size:19px;
+  background:linear-gradient(135deg,#e8f1f9,#e0f2f4);
+}
+.course-body{flex:1;min-width:0}
+.course-body b{
+  display:block;font-size:14.5px;font-weight:700;
+  color:var(--ink);
+  margin-bottom:2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.course-body span{font-size:12px;color:var(--muted)}
+.course-score{text-align:left;flex-shrink:0}
+.course-score b{
+  font-size:15px;font-weight:800;color:var(--ink);
+  display:block;line-height:1.2;
+}
+.course-score small{font-size:11px;color:var(--muted);font-weight:500}
+
+.grade-list{display:flex;flex-direction:column;gap:10px}
+.grade-item{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;border-radius:14px;
+  background:#fff;border:1px solid var(--line);
+}
+.grade-body{flex:1;min-width:0}
+.grade-body b{
+  display:block;font-size:14px;font-weight:700;
+  color:var(--ink);
+  margin-bottom:3px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.grade-body span{font-size:11.5px;color:var(--muted)}
+.grade-value{
+  text-align:left;flex-shrink:0;
+  font-family:monospace;font-weight:800;
+  font-size:14px;color:var(--ink);
+}
+
+.note-item{
+  padding:14px 16px;border-radius:14px;
+  background:#fff;border:1px solid var(--line);
+  margin-bottom:10px;
+}
+.note-head{
+  display:flex;justify-content:space-between;
+  font-size:11.5px;color:var(--muted);
+  margin-bottom:6px;font-weight:600;
+}
+.note-body{
+  font-size:14px;line-height:1.65;
+  color:var(--ink-2);
+}
+
+.profile-logout{
+  margin-top:22px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.profile-logout .btn{flex:1;min-width:140px}
+
+@media(min-width:720px){
+  .stats-grid{grid-template-columns:repeat(4,1fr)}
+  .board-content h3{font-size:19px}
+}
+@media(max-width:380px){
+  .code-box{gap:6px}
+  .code-box input{width:42px;height:52px;font-size:19px;border-radius:12px}
+  .container{padding:16px 14px 120px}
+  .waiting-card{padding:28px 18px}
+  .board-head{padding:12px 14px 0}
+  .board-media{padding:12px 14px 0}
+  .board-content{padding:14px 14px 0}
+  .board-content h3{font-size:16px}
+  .board-options{padding:14px 14px 0}
+  .board-actions{padding:16px 14px 18px}
+  .login-card{padding:26px 18px 22px}
+  .profile-login-wrap{padding:18px 14px 120px}
+  .home-hero h1{font-size:20px}
+  .hero-logo{width:76px;height:76px;font-size:36px}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     1) الصفحة الرئيسية
+     ============================================================ -->
+<section class="view active" id="view-home">
+
+  <header class="app-bar">
+    <div class="app-bar-inner">
+      <div class="app-logo">⚖️</div>
+      <div>
+        <div class="app-title">كلية الشريعة والقانون</div>
+        <div class="app-subtitle">جامعة القرآن الكريم</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <div class="home-hero">
+      <div class="hero-logo">⚖️</div>
+      <div class="hero-university">جامعة القرآن الكريم</div>
+      <h1>كلية الشريعة والقانون</h1>
+      <p class="hero-tagline">
+        منصة تفاعلية لمحاضرات كلية الشريعة والقانون — شارك في الأسئلة،
+        تابع المحاضرات، وأدر ملفك الأكاديمي من مكان واحد
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn btn-primary" data-go="view-join">
+          🎓 دخول محاضرة
+        </button>
+        <button class="btn btn-ghost" id="homeProfileBtn">
+          👤 ملفي الأكاديمي
+        </button>
+      </div>
+    </div>
+
+    <div class="home-section">
+      <h2 class="section-title">كيف تعمل المنصة؟</h2>
+      <p class="section-subtitle">ثلاث خطوات بسيطة للتفاعل مع محاضراتك</p>
+
+      <div class="steps-list">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div class="step-body">
+            <h3>احصل على رمز المحاضرة</h3>
+            <p>يعرض الدكتور محمود الزين رمزاً من 6 أرقام على شاشة القاعة في بداية كل محاضرة تفاعلية.</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div class="step-body">
+            <h3>ادخل وشارك</h3>
+            <p>افتح المنصة من هاتفك، أدخل الرمز، وشارك في الأسئلة والتصويتات والأنشطة التعليمية.</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div class="step-body">
+            <h3>تابع نتائجك</h3>
+            <p>بعد تسجيل الدخول إلى ملفك الأكاديمي، تابع درجاتك وملاحظاتك وأداءك في المقررات.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-section">
+      <h2 class="section-title">ما الذي تقدمه المنصة؟</h2>
+      <p class="section-subtitle">أدوات متكاملة لتجربة تعليمية أفضل</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>تفاعل مباشر</h3>
+          <p>أسئلة وتصويتات لحظية خلال المحاضرة</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>لوحة عرض متعددة</h3>
+          <p>نصوص قانونية، صور، فيديوهات وملفات PDF</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📝</div>
+          <h3>اختبارات قصيرة</h3>
+          <p>تصحيح تلقائي ومتابعة النتائج</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📚</div>
+          <h3>ملف أكاديمي</h3>
+          <p>درجات وملاحظات ومتابعة الأداء</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-access">
+      <h2>ابدأ الآن</h2>
+      <div class="quick-actions">
+        <button class="quick-card" data-go="view-join">
+          <div class="quick-icon">🎓</div>
+          <div class="quick-body">
+            <b>دخول محاضرة</b>
+            <span>هل معك رمز المحاضرة؟ ادخل الآن</span>
+          </div>
+          <span class="quick-arrow">←</span>
+        </button>
+
+        <button class="quick-card" id="homeProfileBtn2">
+          <div class="quick-icon">📋</div>
+          <div class="quick-body">
+            <b>ملفي الأكاديمي</b>
+            <span>تابع درجاتك، ملاحظاتك وأداءك</span>
+          </div>
+          <span class="quick-arrow">←</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="home-footer">
+      <div class="footer-logo">⚖️</div>
+      <p>
+        <b>جامعة القرآن الكريم — كلية الشريعة والقانون</b><br>
+        مبادرة تطويرية لتعزيز التفاعل في المحاضرات الجامعية
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     2) شاشة الدخول للمحاضرة
+     ============================================================ -->
+<section class="view" id="view-join">
+  <div class="join-wrap">
+    <div class="join-logo">⚖️</div>
+    <div class="join-univ">جامعة القرآن الكريم — كلية الشريعة والقانون</div>
+    <h1 class="join-title">الدخول إلى المحاضرة</h1>
+    <p class="join-desc">أدخل الرمز المكوّن من 6 أرقام<br>الذي عرضه الدكتور على الشاشة</p>
+
+    <div class="join-steps">
+      <div class="join-step active"><span class="num">1</span> الرمز</div>
+      <div class="join-step-line"></div>
+      <div class="join-step"><span class="num">2</span> التحقق</div>
+      <div class="join-step-line"></div>
+      <div class="join-step"><span class="num">3</span> المحاضرة</div>
+    </div>
+
+    <div class="code-box" id="codeInputs">
+      <input maxlength="1" inputmode="numeric" autocomplete="off">
+      <input maxlength="1" inputmode="numeric" autocomplete="off">
+      <input maxlength="1" inputmode="numeric" autocomplete="off">
+      <input maxlength="1" inputmode="numeric" autocomplete="off">
+      <input maxlength="1" inputmode="numeric" autocomplete="off">
+      <input maxlength="1" inputmode="numeric" autocomplete="off">
+    </div>
+
+    <div class="code-hint" id="codeHint">
+      💡 للتجربة، الرمز الافتراضي: <b>482915</b>
+    </div>
+
+    <button class="btn btn-primary btn-block" id="joinBtn" disabled>
+      دخول المحاضرة
+    </button>
+
+    <div class="divider">أو</div>
+
+    <div class="qr-block">
+      <div class="qr-mini" id="fakeqr"></div>
+      <p class="qr-note">امسح رمز QR بكاميرا الهاتف للدخول المباشر</p>
+    </div>
+
+    <div class="trust">
+      <span class="lock">🔒</span>
+      <span>المشاركة في الأنشطة العامة لا تتطلب تسجيل دخول، أما الدرجات الفردية فتتطلب التحقق من الهوية.</span>
+    </div>
+
+    <div style="text-align:center;margin-top:18px">
+      <button class="btn btn-ghost btn-sm" data-go="view-home">
+        ← العودة إلى الرئيسية
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     3) شاشة التحميل
+     ============================================================ -->
+<section class="view" id="view-loading">
+  <div class="loader-wrap">
+    <div class="spinner">
+      <svg viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="loaderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#17568d"/>
+            <stop offset="100%" stop-color="#3d8bc7"/>
+          </linearGradient>
+        </defs>
+        <circle class="track" cx="50" cy="50" r="42"/>
+        <circle class="arc" cx="50" cy="50" r="42"/>
+      </svg>
+      <div class="center">⚖️</div>
+    </div>
+
+    <h2 class="loader-title" id="loaderTitle">جاري تجهيز المحاضرة</h2>
+    <p class="loader-step" id="loaderStep">جاري التحقق من الرمز...</p>
+
+    <div class="loader-bar"><span id="loaderBar"></span></div>
+
+    <div class="loader-code">الرمز <b id="loaderCode">------</b></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     4) المحاضرة المباشرة
+     ============================================================ -->
+<section class="view" id="view-live">
+
+  <header class="app-bar">
+    <div class="app-bar-inner">
+      <div class="app-logo">⚖️</div>
+      <div>
+        <div class="app-title">المحاضرة التفاعلية</div>
+        <div class="app-subtitle">مقدمة في القانون — كلية الشريعة والقانون</div>
+      </div>
+      <span class="live-badge"><span class="live-dot"></span> مباشر الآن</span>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <div class="lecture-card">
+      <div class="lc-top">
+        <span class="lc-live"><span class="dot"></span> مباشر الآن</span>
+        <span class="lc-timer" id="liveTimer">00:00</span>
+      </div>
+      <h3>مقدمة في القانون — المحاضرة 3</h3>
+      <p class="lc-meta">د. محمود الزين · كلية الشريعة والقانون</p>
+    </div>
+
+    <div class="code-strip">
+      <span class="cs-label">رمز المحاضرة</span>
+      <span class="cs-value" id="liveCode">482915</span>
+      <button class="cs-copy" id="copyCodeBtn" title="نسخ الرمز">📋</button>
+    </div>
+
+    <div class="state" id="state-waiting">
+      <div class="waiting-card">
+        <div class="waiting-visual">
+          <div class="waiting-icon">📜</div>
+        </div>
+        <h3>لا يوجد محتوى حالياً</h3>
+        <p>بانتظار أن يعرض الدكتور سؤالاً أو صورة أو ملفاً... سيظهر هنا تلقائياً</p>
+
+        <div class="waiting-dots">
+          <span></span><span></span><span></span>
+        </div>
+
+        <button class="btn btn-ghost btn-block btn-sm" id="simulateBtn">
+          ▶︎ محاكاة عرض من الدكتور (للتجربة)
+        </button>
+
+        <div class="simulate-hint">وضع العرض التجريبي</div>
+      </div>
+    </div>
+
+    <div class="state" id="state-board" hidden>
+      <div class="board-card" id="boardCard">
+        <div class="board-head">
+          <span class="board-tag" id="boardTag">سؤال</span>
+          <span class="board-time" id="boardTime">الآن</span>
+        </div>
+
+        <div class="board-media" id="boardMedia"></div>
+
+        <div class="board-content">
+          <h3 id="boardTitle"></h3>
+          <p id="boardDescription"></p>
+        </div>
+
+        <div class="board-options" id="boardOptions">
+          <div class="options-list" id="optionsList"></div>
+        </div>
+
+        <div class="board-actions" id="boardActions">
+          <button class="btn btn-primary btn-block" id="submitAnswer">
+            إرسال الإجابة
+          </button>
+        </div>
+      </div>
+
+      <div class="preview-strip">
+        <div class="preview-label">
+          <span class="dot"></span>
+          وضع المعاينة — كيف تظهر اللوحة مع كل نوع محتوى
+        </div>
+        <div class="preview-tabs">
+          <button class="preview-tab active" data-preview="question"><span class="em">❓</span> سؤال</button>
+          <button class="preview-tab" data-preview="image"><span class="em">🖼️</span> صورة</button>
+          <button class="preview-tab" data-preview="video"><span class="em">🎬</span> فيديو</button>
+          <button class="preview-tab" data-preview="pdf"><span class="em">📄</span> PDF</button>
+          <button class="preview-tab" data-preview="announcement"><span class="em">📢</span> إعلان</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="state" id="state-submitted" hidden>
+      <div class="submitted-card">
+        <div class="submitted-icon">
+          <div class="check">✓</div>
+        </div>
+        <h3>تم إرسال ردك</h3>
+        <p>تم استلام إجابتك بنجاح، بانتظار المحتوى التالي من الدكتور</p>
+
+        <div class="waiting-next">
+          <span class="spinner-mini"></span>
+          <span>بانتظار الرسالة التالية...</span>
+        </div>
+      </div>
+
+      <div class="preview-strip" style="margin-top:14px">
+        <div class="preview-label">
+          <span class="dot"></span>
+          للتجربة — العودة لعرض المحتوى
+        </div>
+        <div class="preview-tabs">
+          <button class="preview-tab" data-preview="question"><span class="em">❓</span> سؤال جديد</button>
+          <button class="preview-tab" data-preview="image"><span class="em">🖼️</span> صورة</button>
+          <button class="preview-tab" data-preview="video"><span class="em">🎬</span> فيديو</button>
+          <button class="preview-tab" data-preview="pdf"><span class="em">📄</span> PDF</button>
+          <button class="preview-tab" data-preview="announcement"><span class="em">📢</span> إعلان</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card ask-card" style="margin-top:18px">
+      <div class="card-header">
+        <h3>💬 اسأل الدكتور</h3>
+        <span class="ask-status open" id="askStatus">
+          <span class="dot"></span>
+          <span id="askStatusText">مفتوح</span>
+        </span>
+      </div>
+
+      <div id="askOpen" class="ask-open">
+        <textarea placeholder="اكتب سؤالك أثناء المحاضرة..."></textarea>
+        <button class="btn btn-ghost btn-block btn-sm">إرسال السؤال</button>
+      </div>
+
+      <div id="askClosed" class="ask-closed" hidden>
+        <div class="lock-icon">🔒</div>
+        <div class="closed-text">
+          <b>استقبال الأسئلة مغلق حالياً</b>
+          <span>الدكتور لم يفتح المجال للأسئلة بعد — سيتم تنبيهك عند فتحه</span>
+        </div>
+      </div>
+
+      <div class="ask-demo">
+        <span class="ask-demo-label">معاينة:</span>
+        <button class="ask-demo-btn active" data-ask="open">مفتوح</button>
+        <button class="ask-demo-btn" data-ask="closed">مغلق</button>
+      </div>
+
+      <div class="divider" style="margin:18px 0 14px">الأسئلة السابقة</div>
+
+      <div class="qfrom">
+        <div class="qh"><span>أنت</span><span>قبل 3 د</span></div>
+        <p>ما الفرق بين الحقوق السياسية والحقوق المدنية؟</p>
+      </div>
+      <div class="qfrom" style="margin-bottom:0">
+        <div class="qh"><span>د. محمود الزين</span><span>قبل دقيقتين</span></div>
+        <p>سؤال مهم، سنناقشه بعد انتهاء التصويت — راجع فصل أنواع الحقوق 👍</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     5) شاشة تسجيل الدخول للملف الشخصي
+     ============================================================ -->
+<section class="view" id="view-profile-login">
+
+  <header class="app-bar">
+    <div class="app-bar-inner">
+      <div class="app-logo">⚖️</div>
+      <div>
+        <div class="app-title">تسجيل الدخول</div>
+        <div class="app-subtitle">للوصول إلى ملفك الأكاديمي</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="profile-login-wrap">
+    <div class="login-card">
+      <div class="login-icon-wrap">
+        <div class="login-icon">👨‍⚖️</div>
+      </div>
+
+      <h2 class="login-title">تسجيل الدخول</h2>
+      <p class="login-desc">
+        أدخل رقمك الجامعي والكود السري الخاص بك<br>للوصول إلى ملفك الأكاديمي
+      </p>
+
+      <div class="login-field">
+        <label><span class="lbl-num">1</span> الرقم الجامعي</label>
+        <input
+          type="text"
+          inputmode="numeric"
+          class="login-input"
+          id="uniId"
+          placeholder="مثال: 20211234"
+          autocomplete="off"
+          maxlength="12">
+      </div>
+
+      <div class="login-field">
+        <label><span class="lbl-num">2</span> الكود السري</label>
+        <div class="secret-wrap">
+          <input
+            type="password"
+            class="login-input"
+            id="secretCode"
+            placeholder="A1B2C3D4"
+            autocomplete="off"
+            maxlength="8"
+            spellcheck="false">
+          <button type="button" class="secret-toggle" id="secretToggle" aria-label="إظهار">
+            👁️
+          </button>
+        </div>
+        <div class="secret-progress" id="secretProgress">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="login-hint" id="profileHint">
+        💡 للتجربة: الرقم الجامعي <b>20211234</b> · الكود <b>ABC12345</b>
+      </div>
+
+      <button class="btn btn-primary btn-block" id="profileLoginBtn" disabled>
+        دخول إلى ملفي
+      </button>
+
+      <div class="login-privacy">
+        <span class="lock">🔒</span>
+        <span>بياناتك الأكاديمية محمية. الكود السري خاص بك وحدك — لا تشاركه مع أحد.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     6) الملف الأكاديمي
+     ============================================================ -->
+<section class="view" id="view-profile">
+
+  <header class="app-bar">
+    <div class="app-bar-inner">
+      <div class="app-logo">⚖️</div>
+      <div>
+        <div class="app-title">ملفي الأكاديمي</div>
+        <div class="app-subtitle">كلية الشريعة والقانون · الفصل الأول 2026</div>
+      </div>
+      <span class="pill ok" style="margin-inline-start:auto">
+        <span style="width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block"></span>
+        مُسجَّل
+      </span>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <div class="profile-card">
+      <div class="profile-row">
+        <div class="profile-avatar">ح</div>
+        <div class="profile-info">
+          <h2>الحسين مشعل</h2>
+          <p>20211234 · الشريعة والقانون · المستوى الثالث</p>
+        </div>
+      </div>
+      <div class="profile-score">
+        <div>
+          <div class="ps-num">87<small>/100</small></div>
+          <div class="ps-label">النقاط العامة</div>
+        </div>
+        <div class="ps-bar"><span id="profileBar" data-w="87"></span></div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="sb-icon" style="background:#e5f5ee">✅</div>
+        <div class="sb-num">96%</div>
+        <div class="sb-label">نسبة الحضور</div>
+      </div>
+      <div class="stat-box">
+        <div class="sb-icon" style="background:#e0f2f4">⚡</div>
+        <div class="sb-num">42</div>
+        <div class="sb-label">مشاركة تفاعلية</div>
+      </div>
+      <div class="stat-box">
+        <div class="sb-icon" style="background:#fef5e5">📝</div>
+        <div class="sb-num">8<small>/10</small></div>
+        <div class="sb-label">الاختبارات</div>
+      </div>
+      <div class="stat-box">
+        <div class="sb-icon">📚</div>
+        <div class="sb-num">4</div>
+        <div class="sb-label">المقررات</div>
+      </div>
+    </div>
+
+    <div class="tabs-scroll">
+      <button class="tab-pill active" data-tab="tab-courses">المقررات</button>
+      <button class="tab-pill" data-tab="tab-grades">الدرجات</button>
+      <button class="tab-pill" data-tab="tab-notes">ملاحظاتي</button>
+    </div>
+
+    <div class="tab-pane active" id="tab-courses">
+      <div class="course-item">
+        <div class="course-icon">📜</div>
+        <div class="course-body">
+          <b>مقدمة في القانون</b>
+          <span>د. محمود الزين</span>
+        </div>
+        <div class="course-score"><b>88</b><small>من 100</small></div>
+      </div>
+      <div class="course-item">
+        <div class="course-icon">⚖️</div>
+        <div class="course-body">
+          <b>مبادئ القانون الدستوري</b>
+          <span>د. محمود الزين</span>
+        </div>
+        <div class="course-score"><b>76</b><small>من 100</small></div>
+      </div>
+      <div class="course-item">
+        <div class="course-icon">📗</div>
+        <div class="course-body">
+          <b>مبادئ القانون المدني</b>
+          <span>د. محمود الزين</span>
+        </div>
+        <div class="course-score"><b>92</b><small>من 100</small></div>
+      </div>
+      <div class="course-item">
+        <div class="course-icon">📋</div>
+        <div class="course-body">
+          <b>مبادئ القانون الجنائي</b>
+          <span>د. محمود الزين</span>
+        </div>
+        <div class="course-score"><b>81</b><small>من 100</small></div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="tab-grades">
+      <div class="grade-list">
+        <div class="grade-item">
+          <div class="course-icon" style="width:38px;height:38px;font-size:16px">📝</div>
+          <div class="grade-body">
+            <b>اختبار أنواع الحقوق</b>
+            <span>مقدمة في القانون · اختبار</span>
+          </div>
+          <div class="grade-value">9/10</div>
+        </div>
+        <div class="grade-item">
+          <div class="course-icon" style="width:38px;height:38px;font-size:16px;background:#e5f5ee">⚡</div>
+          <div class="grade-body">
+            <b>مشاركة — حق التصويت</b>
+            <span>مقدمة في القانون · مشاركة</span>
+          </div>
+          <div class="grade-value">2/2</div>
+        </div>
+        <div class="grade-item">
+          <div class="course-icon" style="width:38px;height:38px;font-size:16px;background:#fef5e5">📋</div>
+          <div class="grade-body">
+            <b>واجب — السلطات الثلاث في الدولة</b>
+            <span>القانون الدستوري · قيد التصحيح</span>
+          </div>
+          <div class="grade-value" style="color:var(--muted)">—</div>
+        </div>
+        <div class="grade-item">
+          <div class="course-icon" style="width:38px;height:38px;font-size:16px">📝</div>
+          <div class="grade-body">
+            <b>اختبار مصادر القانون</b>
+            <span>مقدمة في القانون · اختبار</span>
+          </div>
+          <div class="grade-value">18/20</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="tab-notes">
+      <div class="card" style="padding:16px">
+        <textarea placeholder="اكتب ملاحظتك..." style="width:100%;min-height:70px;padding:12px 14px;border:1.5px solid var(--line-2);border-radius:12px;background:#fbfcfe;outline:none;resize:vertical;font-size:15px;line-height:1.6;color:var(--ink)"></textarea>
+        <button class="btn btn-primary btn-block btn-sm" style="margin-top:10px">حفظ الملاحظة</button>
+      </div>
+
+      <div style="margin-top:14px">
+        <div class="note-item">
+          <div class="note-head"><span>مقدمة في القانون</span><span>12 مارس</span></div>
+          <div class="note-body">مراجعة أنواع الحقوق — السياسية، المدنية، الاقتصادية، والاجتماعية. ركّز على أمثلة حق التصويت.</div>
+        </div>
+        <div class="note-item">
+          <div class="note-head"><span>القانون الدستوري</span><span>8 مارس</span></div>
+          <div class="note-body">مراجعة السلطات الثلاث: التشريعية، التنفيذية، والقضائية — ووظائف كل سلطة.</div>
+        </div>
+        <div class="note-item">
+          <div class="note-head"><span>ملاحظة من د. محمود الزين</span><span>5 مارس</span></div>
+          <div class="note-body">إجابة ممتازة في اختبار أنواع الحقوق 👏 — استمر على هذا المستوى.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-logout">
+      <button class="btn btn-ghost" id="profileLogoutBtn">
+        🔓 تسجيل الخروج من الملف
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     الشريط السفلي العام
+     ============================================================ -->
+<nav class="tab-bar" id="globalTabBar">
+  <div class="tab-bar-inner">
+
+    <button class="tab-btn active" data-go="view-home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+      الرئيسية
+    </button>
+
+    <button class="tab-btn" data-go="view-live">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2v20M2 12h20"/>
+      </svg>
+      المحاضرة
+    </button>
+
+    <button class="tab-btn" data-go="view-profile">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      ملفي
+    </button>
+
+    <button class="tab-btn" id="globalLeaveBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+        <polyline points="16 17 21 12 16 7"/>
+        <line x1="21" y1="12" x2="9" y2="12"/>
+      </svg>
+      خروج
+    </button>
+
+  </div>
+</nav>
+
+<script>
+const VALID_LECTURE_CODE = '482915';
+const VALID_UNI_ID       = '20211234';
+const VALID_SECRET       = 'ABC12345';
+
+let isProfileLoggedIn = false;
+let enteredLectureCode = '';
+
+const views = document.querySelectorAll('.view');
+const globalTabBar = document.getElementById('globalTabBar');
+
+const TAB_BAR_VIEWS = ['view-home', 'view-live', 'view-profile', 'view-profile-login'];
+
+function showView(id){
+  views.forEach(v => v.classList.toggle('active', v.id === id));
+  globalTabBar.classList.toggle('show', TAB_BAR_VIEWS.includes(id));
+
+  document.querySelectorAll('#globalTabBar .tab-btn[data-go]').forEach(b => {
+    const isProfileTab  = b.dataset.go === 'view-profile';
+    const isProfileArea = id === 'view-profile' || id === 'view-profile-login';
+    const active = b.dataset.go === id || (isProfileTab && isProfileArea);
+    b.classList.toggle('active', active);
+  });
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if(id === 'view-live') startLiveTimer();
+  else stopLiveTimer();
+
+  if(id === 'view-profile'){
+    const bar = document.getElementById('profileBar');
+    if(bar){
+      bar.style.width = '0%';
+      setTimeout(() => { bar.style.width = bar.dataset.w + '%'; }, 200);
+    }
+  }
+}
+
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-go]');
+  if(!t) return;
+  const target = t.dataset.go;
+  if(target === 'view-profile' && !isProfileLoggedIn){
+    openProfileLogin();
+    return;
+  }
+  showView(target);
+});
+
+document.getElementById('homeProfileBtn').addEventListener('click', () => {
+  isProfileLoggedIn ? showView('view-profile') : openProfileLogin();
+});
+document.getElementById('homeProfileBtn2').addEventListener('click', () => {
+  isProfileLoggedIn ? showView('view-profile') : openProfileLogin();
+});
+
+const codeInputs = document.querySelectorAll('#codeInputs input');
+const joinBtn    = document.getElementById('joinBtn');
+const codeHint   = document.getElementById('codeHint');
+const codeBox    = document.getElementById('codeInputs');
+const getCode    = () => Array.from(codeInputs).map(i => i.value).join('');
+
+function refreshJoinState(){
+  const code = getCode();
+  joinBtn.disabled = code.length !== 6;
+  codeInputs.forEach(inp => inp.classList.toggle('filled', inp.value !== ''));
+  if(code.length === 0){
+    codeHint.classList.remove('error');
+    codeHint.innerHTML = '💡 للتجربة، الرمز الافتراضي: <b>482915</b>';
+  }
+}
+
+codeInputs.forEach((inp, i) => {
+  inp.addEventListener('input', () => {
+    inp.value = inp.value.replace(/[^0-9]/g, '').slice(0,1);
+    if(inp.value && i < codeInputs.length - 1) codeInputs[i+1].focus();
+    codeHint.classList.remove('error');
+    codeHint.innerHTML = '💡 للتجربة، الرمز الافتراضي: <b>482915</b>';
+    refreshJoinState();
+  });
+  inp.addEventListener('keydown', e => {
+    if(e.key === 'Backspace' && !inp.value && i > 0){
+      codeInputs[i-1].focus();
+      codeInputs[i-1].value = '';
+      refreshJoinState();
+    }
+  });
+  inp.addEventListener('paste', e => {
+    e.preventDefault();
+    const pasted = (e.clipboardData.getData('text') || '').replace(/[^0-9]/g,'').slice(0,6);
+    if(!pasted) return;
+    codeInputs.forEach((b, idx) => b.value = pasted[idx] || '');
+    codeInputs[Math.min(pasted.length, codeInputs.length - 1)].focus();
+    refreshJoinState();
+  });
+});
+
+const loaderBar   = document.getElementById('loaderBar');
+const loaderStep  = document.getElementById('loaderStep');
+const loaderCode  = document.getElementById('loaderCode');
+const loaderTitle = document.getElementById('loaderTitle');
+
+const loadingSteps = [
+  { text: 'جاري التحقق من الرمز...' },
+  { text: 'جاري الاتصال بالمحاضرة...' },
+  { text: 'جاري تحضير اللوحة التفاعلية...' },
+  { text: 'لحظات وننقلك إلى القاعة...' },
+];
+
+function runLoadingFlow(code){
+  showView('view-loading');
+  loaderCode.textContent = code;
+  loaderTitle.textContent = 'جاري تجهيز المحاضرة';
+  loaderStep.textContent = loadingSteps[0].text;
+  loaderBar.style.width = '0%';
+
+  let idx = 0;
+  const stepTimer = setInterval(() => {
+    idx++;
+    if(idx >= loadingSteps.length){ clearInterval(stepTimer); return; }
+    loaderStep.textContent = loadingSteps[idx].text;
+  }, 550);
+
+  let progress = 0;
+  const progressTimer = setInterval(() => {
+    progress += 2;
+    if(progress > parseFloat(loaderBar.style.width)){
+      loaderBar.style.width = Math.min(progress, 100) + '%';
+    }
+    if(progress >= 100){
+      clearInterval(progressTimer);
+      setTimeout(() => {
+        document.getElementById('liveCode').textContent = code;
+        showView('view-live');
+        switchState('waiting');
+      }, 280);
+    }
+  }, 30);
+}
+
+joinBtn.addEventListener('click', () => {
+  const code = getCode();
+  if(code.length !== 6){
+    codeBox.classList.add('shake');
+    codeHint.classList.add('error');
+    codeHint.textContent = '⚠️ الرجاء إدخال 6 أرقام';
+    setTimeout(() => codeBox.classList.remove('shake'), 420);
+    return;
+  }
+  if(code !== VALID_LECTURE_CODE){
+    codeBox.classList.add('shake');
+    codeHint.classList.add('error');
+    codeHint.textContent = '⚠️ الرمز غير صحيح أو انتهت صلاحيته';
+    setTimeout(() => codeBox.classList.remove('shake'), 420);
+    return;
+  }
+  enteredLectureCode = code;
+  runLoadingFlow(code);
+});
+
+const copyCodeBtn = document.getElementById('copyCodeBtn');
+
+copyCodeBtn.addEventListener('click', async () => {
+  const code = document.getElementById('liveCode').textContent.trim();
+  let success = false;
+
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    try {
+      await navigator.clipboard.writeText(code);
+      success = true;
+    } catch(err){ /* fallback */ }
+  }
+
+  if(!success){
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = code;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      success = true;
+    } catch(err){ /* فشل */ }
+  }
+
+  if(success){
+    if(navigator.vibrate) navigator.vibrate([8, 30, 8]);
+    copyCodeBtn.textContent = '✓';
+    copyCodeBtn.classList.add('copied');
+    copyCodeBtn.title = 'تم النسخ';
+    setTimeout(() => {
+      copyCodeBtn.textContent = '📋';
+      copyCodeBtn.classList.remove('copied');
+      copyCodeBtn.title = 'نسخ الرمز';
+    }, 1600);
+  }
+});
+
+const stateWaiting   = document.getElementById('state-waiting');
+const stateBoard     = document.getElementById('state-board');
+const stateSubmitted = document.getElementById('state-submitted');
+
+function switchState(name){
+  stateWaiting.hidden   = name !== 'waiting';
+  stateBoard.hidden     = name !== 'board';
+  stateSubmitted.hidden = name !== 'submitted';
+
+  const shown = name === 'waiting' ? stateWaiting :
+                name === 'board' ? stateBoard : stateSubmitted;
+  shown.style.animation = 'none';
+  void shown.offsetWidth;
+  shown.style.animation = '';
+}
+
+const boardTag         = document.getElementById('boardTag');
+const boardTime        = document.getElementById('boardTime');
+const boardMedia       = document.getElementById('boardMedia');
+const boardTitle       = document.getElementById('boardTitle');
+const boardDescription = document.getElementById('boardDescription');
+const boardOptions     = document.getElementById('boardOptions');
+const optionsList      = document.getElementById('optionsList');
+const boardActions     = document.getElementById('boardActions');
+const submitAnswer     = document.getElementById('submitAnswer');
+const simulateBtn      = document.getElementById('simulateBtn');
+
+const CONTENT = {
+  question: {
+    tag: '❓ سؤال', tagClass: '',
+    media: null,
+    title: 'حق التصويت يُعدّ من الحقوق:',
+    description: '',
+    options: [
+      { key: 'أ', text: 'السياسية' },
+      { key: 'ب', text: 'المدنية' },
+      { key: 'ج', text: 'الاقتصادية' },
+      { key: 'د', text: 'الاجتماعية' }
+    ],
+    action: 'إرسال الإجابة'
+  },
+
+  image: {
+    tag: '🖼️ صورة', tagClass: 'image',
+    media: {
+      type: 'image',
+      svg: `<svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="powerLeg" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#17568d"/>
+            <stop offset="100%" stop-color="#3d8bc7"/>
+          </linearGradient>
+          <linearGradient id="powerExec" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#0d7d8a"/>
+            <stop offset="100%" stop-color="#0d9668"/>
+          </linearGradient>
+          <linearGradient id="powerJud" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#7c5a1a"/>
+            <stop offset="100%" stop-color="#c77700"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="240" fill="#f4f6fa"/>
+        <text x="200" y="34" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="14" font-weight="800" fill="#0b3356">
+          السلطات الثلاث في الدولة
+        </text>
+
+        <rect x="26" y="60" width="106" height="140" rx="12" fill="url(#powerLeg)"/>
+        <text x="79" y="100" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="30" fill="#ffffff">🏛️</text>
+        <text x="79" y="130" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="13" font-weight="800" fill="#ffffff">التشريعية</text>
+        <text x="79" y="152" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="10.5" fill="rgba(255,255,255,.9)">البرلمان</text>
+        <text x="79" y="170" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="10.5" fill="rgba(255,255,255,.9)">سن القوانين</text>
+
+        <rect x="147" y="60" width="106" height="140" rx="12" fill="url(#powerExec)"/>
+        <text x="200" y="100" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="30" fill="#ffffff">⚙️</text>
+        <text x="200" y="130" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="13" font-weight="800" fill="#ffffff">التنفيذية</text>
+        <text x="200" y="152" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="10.5" fill="rgba(255,255,255,.9)">الحكومة</text>
+        <text x="200" y="170" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="10.5" fill="rgba(255,255,255,.9)">تنفيذ القوانين</text>
+
+        <rect x="268" y="60" width="106" height="140" rx="12" fill="url(#powerJud)"/>
+        <text x="321" y="100" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="30" fill="#ffffff">⚖️</text>
+        <text x="321" y="130" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="13" font-weight="800" fill="#ffffff">القضائية</text>
+        <text x="321" y="152" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="10.5" fill="rgba(255,255,255,.9)">المحاكم</text>
+        <text x="321" y="170" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="10.5" fill="rgba(255,255,255,.9)">الفصل في المنازعات</text>
+      </svg>`,
+      caption: 'السلطات الثلاث في الدولة — مفهوم أساسي'
+    },
+    title: 'السلطات الثلاث في الدولة',
+    description: 'تتكون الدولة الحديثة من ثلاث سلطات رئيسية: التشريعية (تسن القوانين)، التنفيذية (تنفذها)، والقضائية (تفصل في المنازعات).',
+    options: null,
+    action: null
+  },
+
+  video: {
+    tag: '🎬 فيديو', tagClass: 'video',
+    media: { type: 'video', title: 'شرح مبسّط — السلطات الثلاث في الدولة', duration: '06:32' },
+    title: 'شاهد الفيديو ثم أجب عن السؤال بعده',
+    description: 'مقطع قصير يشرح السلطات الثلاث في الدولة ووظائف كل سلطة بأمثلة بسيطة.',
+    options: null, action: null
+  },
+
+  pdf: {
+    tag: '📄 ملف PDF', tagClass: 'file',
+    media: {
+      type: 'file',
+      name: 'مقدمة_في_القانون_المحاضرة_الثالثة.pdf',
+      meta: 'PDF · 1.8 ميجابايت · 15 صفحة'
+    },
+    title: 'مقدمة في القانون — المحاضرة الثالثة',
+    description: 'محتوى المحاضرة: أنواع الحقوق، السلطات الثلاث، ومصادر القانون.',
+    options: null, action: null
+  },
+
+  announcement: {
+    tag: '📢 إعلان', tagClass: 'announcement',
+    media: null,
+    title: '📢 مراجعة منتصف الفصل — مقدمة في القانون',
+    description: 'يوم الأحد القادم الساعة 10 صباحاً. راجع الفصول (1-3) خاصة أنواع الحقوق والسلطات الثلاث.',
+    options: null, action: null
+  }
+};
+
+function renderBoard(type){
+  const c = CONTENT[type];
+  if(!c) return;
+
+  boardTag.textContent = c.tag;
+  boardTag.className = 'board-tag ' + (c.tagClass || '');
+  boardTime.textContent = 'الآن';
+
+  if(c.media){
+    if(c.media.type === 'image'){
+      boardMedia.innerHTML = `
+        <div class="media-image">
+          ${c.media.svg}
+          ${c.media.caption ? `
+            <div class="media-caption">
+              <span>🖼️</span>
+              <span>${c.media.caption}</span>
+            </div>
+          ` : ''}
+        </div>`;
+    }
+    else if(c.media.type === 'video'){
+      boardMedia.innerHTML = `
+        <div class="media-video">
+          <div class="mv-thumb"></div>
+          <div class="mv-play">▶</div>
+          <div class="mv-info">
+            <b>${c.media.title}</b>
+            <span class="mv-duration">${c.media.duration}</span>
+          </div>
+        </div>`;
+      boardMedia.querySelector('.media-video').addEventListener('click', () => {
+        if(navigator.vibrate) navigator.vibrate(10);
+      });
+    }
+    else if(c.media.type === 'file'){
+      boardMedia.innerHTML = `
+        <div class="media-file">
+          <div class="media-file-icon">PDF</div>
+          <div class="media-file-info">
+            <b>${c.media.name}</b>
+            <span>${c.media.meta}</span>
+          </div>
+          <div class="media-file-actions">
+            <button class="file-btn read">👁️ قراءة</button>
+            <button class="file-btn download">⬇ تحميل</button>
+          </div>
+        </div>`;
+    }
+  } else {
+    boardMedia.innerHTML = '';
+  }
+
+  boardTitle.textContent = c.title || '';
+  boardDescription.textContent = c.description || '';
+
+  if(c.options && c.options.length){
+    boardOptions.style.display = '';
+    boardActions.style.display = '';
+    optionsList.innerHTML = c.options.map(o => `
+      <button class="option" data-key="${o.key}">
+        <span class="key">${o.key}</span>
+        ${o.text}
+      </button>
+    `).join('');
+    submitAnswer.textContent = c.action || 'إرسال الإجابة';
+
+    optionsList.querySelectorAll('.option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        optionsList.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        if(navigator.vibrate) navigator.vibrate(8);
+      });
+    });
+  } else {
+    boardOptions.style.display = 'none';
+    boardActions.style.display = 'none';
+    optionsList.innerHTML = '';
+  }
+
+  switchState('board');
+
+  document.querySelectorAll('.preview-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.preview === type);
+  });
+}
+
+document.querySelectorAll('.preview-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    if(navigator.vibrate) navigator.vibrate(8);
+    renderBoard(tab.dataset.preview);
+  });
+});
+
+simulateBtn.addEventListener('click', () => {
+  renderBoard('question');
+  setTimeout(() => {
+    stateBoard.scrollIntoView({ behavior:'smooth', block:'start' });
+  }, 100);
+});
+
+submitAnswer.addEventListener('click', () => {
+  const selected = optionsList.querySelector('.option.selected');
+  if(!selected){
+    optionsList.animate(
+      [{ transform:'translateX(0)' }, { transform:'translateX(-6px)' },
+       { transform:'translateX(6px)' }, { transform:'translateX(0)' }],
+      { duration: 260 }
+    );
+    return;
+  }
+  if(navigator.vibrate) navigator.vibrate([10, 40, 10]);
+  switchState('submitted');
+  setTimeout(() => {
+    stateSubmitted.scrollIntoView({ behavior:'smooth', block:'start' });
+  }, 100);
+});
+
+const askStatus     = document.getElementById('askStatus');
+const askStatusText = document.getElementById('askStatusText');
+const askOpen       = document.getElementById('askOpen');
+const askClosed     = document.getElementById('askClosed');
+
+function setAskState(state){
+  if(state === 'open'){
+    askStatus.className = 'ask-status open';
+    askStatusText.textContent = 'مفتوح';
+    askOpen.hidden = false;
+    askClosed.hidden = true;
+  } else {
+    askStatus.className = 'ask-status closed';
+    askStatusText.textContent = 'مغلق';
+    askOpen.hidden = true;
+    askClosed.hidden = false;
+  }
+  document.querySelectorAll('.ask-demo-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.ask === state);
+  });
+}
+
+document.querySelectorAll('.ask-demo-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if(navigator.vibrate) navigator.vibrate(8);
+    setAskState(btn.dataset.ask);
+  });
+});
+
+const uniIdInput     = document.getElementById('uniId');
+const secretInput    = document.getElementById('secretCode');
+const secretToggle   = document.getElementById('secretToggle');
+const secretProgress = document.querySelectorAll('#secretProgress span');
+const profileLoginBtn= document.getElementById('profileLoginBtn');
+const profileHint    = document.getElementById('profileHint');
+
+function openProfileLogin(){
+  uniIdInput.value = '';
+  secretInput.value = '';
+  uniIdInput.classList.remove('filled','shake');
+  secretInput.classList.remove('filled','shake');
+  secretInput.type = 'password';
+  secretToggle.textContent = '👁️';
+  resetSecretProgress();
+  profileHint.classList.remove('error');
+  profileHint.innerHTML = '💡 للتجربة: الرقم الجامعي <b>20211234</b> · الكود <b>ABC12345</b>';
+  refreshProfileLoginState();
+  showView('view-profile-login');
+  setTimeout(() => uniIdInput.focus(), 300);
+}
+
+function updateSecretProgress(){
+  const len = secretInput.value.length;
+  secretProgress.forEach((bar, i) => {
+    bar.classList.toggle('filled', i < len);
+  });
+}
+function resetSecretProgress(){
+  secretProgress.forEach(bar => bar.classList.remove('filled'));
+}
+
+function refreshProfileLoginState(){
+  const id     = uniIdInput.value.trim();
+  const secret = secretInput.value.trim();
+  profileLoginBtn.disabled = !(id.length >= 6 && secret.length === 8);
+}
+
+uniIdInput.addEventListener('input', () => {
+  uniIdInput.value = uniIdInput.value.replace(/[^0-9]/g, '');
+  uniIdInput.classList.toggle('filled', uniIdInput.value.length > 0);
+  profileHint.classList.remove('error');
+  profileHint.innerHTML = '💡 للتجربة: الرقم الجامعي <b>20211234</b> · الكود <b>ABC12345</b>';
+  refreshProfileLoginState();
+});
+
+secretInput.addEventListener('input', () => {
+  let v = secretInput.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+  secretInput.value = v.slice(0, 8);
+  secretInput.classList.toggle('filled', secretInput.value.length > 0);
+  updateSecretProgress();
+  profileHint.classList.remove('error');
+  profileHint.innerHTML = '💡 للتجربة: الرقم الجامعي <b>20211234</b> · الكود <b>ABC12345</b>';
+  refreshProfileLoginState();
+});
+
+secretToggle.addEventListener('click', () => {
+  if(navigator.vibrate) navigator.vibrate(8);
+  const showing = secretInput.type === 'text';
+  secretInput.type = showing ? 'password' : 'text';
+  secretToggle.textContent = showing ? '👁️' : '🙈';
+  secretInput.focus();
+  const len = secretInput.value.length;
+  setTimeout(() => secretInput.setSelectionRange(len, len), 0);
+});
+
+profileLoginBtn.addEventListener('click', () => {
+  const id     = uniIdInput.value.trim();
+  const secret = secretInput.value.trim().toUpperCase();
+
+  if(id !== VALID_UNI_ID){
+    uniIdInput.classList.add('shake');
+    profileHint.classList.add('error');
+    profileHint.textContent = '⚠️ الرقم الجامعي غير مطابق للسجل';
+    setTimeout(() => uniIdInput.classList.remove('shake'), 420);
+    return;
+  }
+
+  if(secret !== VALID_SECRET){
+    secretInput.classList.add('shake');
+    profileHint.classList.add('error');
+    profileHint.textContent = '⚠️ الكود السري غير صحيح';
+    setTimeout(() => secretInput.classList.remove('shake'), 420);
+    return;
+  }
+
+  isProfileLoggedIn = true;
+  if(navigator.vibrate) navigator.vibrate([10, 40, 10]);
+
+  profileLoginBtn.disabled = true;
+  profileLoginBtn.textContent = 'جاري التحقق...';
+
+  setTimeout(() => {
+    profileLoginBtn.textContent = 'دخول إلى ملفي';
+    profileLoginBtn.disabled = false;
+    showView('view-profile');
+  }, 700);
+});
+
+document.getElementById('profileLogoutBtn').addEventListener('click', () => {
+  isProfileLoggedIn = false;
+  openProfileLogin();
+});
+
+document.getElementById('globalLeaveBtn').addEventListener('click', () => {
+  stopLiveTimer();
+  isProfileLoggedIn = false;
+  enteredLectureCode = '';
+  codeInputs.forEach(i => i.value = '');
+  refreshJoinState();
+  switchState('waiting');
+  setAskState('open');
+  showView('view-home');
+});
+
+let liveTimerId = null;
+let liveSeconds = 0;
+
+function startLiveTimer(){
+  stopLiveTimer();
+  liveSeconds = 0;
+  updateTimerText();
+  liveTimerId = setInterval(() => {
+    liveSeconds++;
+    updateTimerText();
+  }, 1000);
+}
+function stopLiveTimer(){
+  if(liveTimerId) clearInterval(liveTimerId);
+  liveTimerId = null;
+}
+function updateTimerText(){
+  const m = String(Math.floor(liveSeconds/60)).padStart(2,'0');
+  const s = String(liveSeconds%60).padStart(2,'0');
+  const el = document.getElementById('liveTimer');
+  if(el) el.textContent = `${m}:${s}`;
+}
+
+document.querySelectorAll('.tab-pill').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const group = btn.closest('.view') || document;
+    group.querySelectorAll('.tab-pill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    group.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    const pane = document.getElementById(btn.dataset.tab);
+    if(pane) pane.classList.add('active');
+  });
+});
+
+(function buildQR(){
+  const el = document.getElementById('fakeqr');
+  if(!el) return;
+  const n = 9, seed = '482915meshaal';
+  el.style.gridTemplateColumns = `repeat(${n}, 1fr)`;
+  let html = '';
+  for(let i = 0; i < n*n; i++){
+    const c = seed.charCodeAt(i % seed.length) + i*7;
+    html += `<i class="${c % 3 !== 0 ? 'on' : ''}"></i>`;
+  }
+  el.innerHTML = html;
+})();
+
+window.addEventListener('load', () => {
+  refreshJoinState();
+  refreshProfileLoginState();
+  resetSecretProgress();
+  globalTabBar.classList.add('show');
+});
+</script>
+
+</body>
+</html>
