@@ -1578,7 +1578,7 @@ p{color:var(--ink-2);font-size:14.5px}
     </div>
 
     <div class="code-hint" id="codeHint">
-      💡 للتجربة، الرمز الافتراضي: <b>482915</b>
+      💡 أدخل الرمز الظاهر على شاشة القاعة
     </div>
 
     <button class="btn btn-primary btn-block" id="joinBtn" disabled>
@@ -1662,7 +1662,7 @@ p{color:var(--ink-2);font-size:14.5px}
 
     <div class="code-strip">
       <span class="cs-label">رمز المحاضرة</span>
-      <span class="cs-value" id="liveCode">482915</span>
+      <span class="cs-value" id="liveCode">------</span>
       <button class="cs-copy" id="copyCodeBtn" title="نسخ الرمز">📋</button>
     </div>
 
@@ -1677,12 +1677,6 @@ p{color:var(--ink-2);font-size:14.5px}
         <div class="waiting-dots">
           <span></span><span></span><span></span>
         </div>
-
-        <button class="btn btn-ghost btn-block btn-sm" id="simulateBtn">
-          ▶︎ محاكاة عرض من الدكتور (للتجربة)
-        </button>
-
-        <div class="simulate-hint">وضع العرض التجريبي</div>
       </div>
     </div>
 
@@ -1710,20 +1704,6 @@ p{color:var(--ink-2);font-size:14.5px}
           </button>
         </div>
       </div>
-
-      <div class="preview-strip">
-        <div class="preview-label">
-          <span class="dot"></span>
-          وضع المعاينة — كيف تظهر اللوحة مع كل نوع محتوى
-        </div>
-        <div class="preview-tabs">
-          <button class="preview-tab active" data-preview="question"><span class="em">❓</span> سؤال</button>
-          <button class="preview-tab" data-preview="image"><span class="em">🖼️</span> صورة</button>
-          <button class="preview-tab" data-preview="video"><span class="em">🎬</span> فيديو</button>
-          <button class="preview-tab" data-preview="pdf"><span class="em">📄</span> PDF</button>
-          <button class="preview-tab" data-preview="announcement"><span class="em">📢</span> إعلان</button>
-        </div>
-      </div>
     </div>
 
     <div class="state" id="state-submitted" hidden>
@@ -1739,20 +1719,6 @@ p{color:var(--ink-2);font-size:14.5px}
           <span>بانتظار الرسالة التالية...</span>
         </div>
       </div>
-
-      <div class="preview-strip" style="margin-top:14px">
-        <div class="preview-label">
-          <span class="dot"></span>
-          للتجربة — العودة لعرض المحتوى
-        </div>
-        <div class="preview-tabs">
-          <button class="preview-tab" data-preview="question"><span class="em">❓</span> سؤال جديد</button>
-          <button class="preview-tab" data-preview="image"><span class="em">🖼️</span> صورة</button>
-          <button class="preview-tab" data-preview="video"><span class="em">🎬</span> فيديو</button>
-          <button class="preview-tab" data-preview="pdf"><span class="em">📄</span> PDF</button>
-          <button class="preview-tab" data-preview="announcement"><span class="em">📢</span> إعلان</button>
-        </div>
-      </div>
     </div>
 
     <div class="card ask-card" style="margin-top:18px">
@@ -1765,8 +1731,8 @@ p{color:var(--ink-2);font-size:14.5px}
       </div>
 
       <div id="askOpen" class="ask-open">
-        <textarea placeholder="اكتب سؤالك أثناء المحاضرة..."></textarea>
-        <button class="btn btn-ghost btn-block btn-sm">إرسال السؤال</button>
+        <textarea id="askBody" placeholder="اكتب سؤالك أثناء المحاضرة..."></textarea>
+        <button class="btn btn-ghost btn-block btn-sm" id="askSendBtn">إرسال السؤال</button>
       </div>
 
       <div id="askClosed" class="ask-closed" hidden>
@@ -1777,22 +1743,9 @@ p{color:var(--ink-2);font-size:14.5px}
         </div>
       </div>
 
-      <div class="ask-demo">
-        <span class="ask-demo-label">معاينة:</span>
-        <button class="ask-demo-btn active" data-ask="open">مفتوح</button>
-        <button class="ask-demo-btn" data-ask="closed">مغلق</button>
-      </div>
+      <div class="divider" style="margin:18px 0 14px">أسئلتك السابقة</div>
 
-      <div class="divider" style="margin:18px 0 14px">الأسئلة السابقة</div>
-
-      <div class="qfrom">
-        <div class="qh"><span>أنت</span><span>قبل 3 د</span></div>
-        <p>ما الفرق بين الحقوق السياسية والحقوق المدنية؟</p>
-      </div>
-      <div class="qfrom" style="margin-bottom:0">
-        <div class="qh"><span>د. محمود الزين</span><span>قبل دقيقتين</span></div>
-        <p>سؤال مهم، سنناقشه بعد انتهاء التصويت — راجع فصل أنواع الحقوق 👍</p>
-      </div>
+      <div id="askList"></div>
     </div>
 
   </div>
@@ -1831,7 +1784,7 @@ p{color:var(--ink-2);font-size:14.5px}
           inputmode="numeric"
           class="login-input"
           id="uniId"
-          placeholder="مثال: 20211234"
+          placeholder="الرقم الجامعي"
           autocomplete="off"
           maxlength="12">
       </div>
@@ -1858,7 +1811,7 @@ p{color:var(--ink-2);font-size:14.5px}
       </div>
 
       <div class="login-hint" id="profileHint">
-        💡 للتجربة: الرقم الجامعي <b>20211234</b> · الكود <b>ABC12345</b>
+        💡 أدخل رقمك الجامعي والكود السري الخاص بك
       </div>
 
       <button class="btn btn-primary btn-block" id="profileLoginBtn" disabled>
@@ -1896,41 +1849,41 @@ p{color:var(--ink-2);font-size:14.5px}
 
     <div class="profile-card">
       <div class="profile-row">
-        <div class="profile-avatar">ح</div>
+        <div class="profile-avatar" id="profileAvatar">؟</div>
         <div class="profile-info">
-          <h2>الحسين مشعل</h2>
-          <p>20211234 · الشريعة والقانون · المستوى الثالث</p>
+          <h2 id="profileName">—</h2>
+          <p id="profileMeta">—</p>
         </div>
       </div>
       <div class="profile-score">
         <div>
-          <div class="ps-num">87<small>/100</small></div>
+          <div class="ps-num"><span id="profileScoreNum">—</span><small>/100</small></div>
           <div class="ps-label">النقاط العامة</div>
         </div>
-        <div class="ps-bar"><span id="profileBar" data-w="87"></span></div>
+        <div class="ps-bar"><span id="profileBar" data-w="0"></span></div>
       </div>
     </div>
 
     <div class="stats-grid">
       <div class="stat-box">
-        <div class="sb-icon" style="background:#e5f5ee">✅</div>
-        <div class="sb-num">96%</div>
-        <div class="sb-label">نسبة الحضور</div>
-      </div>
-      <div class="stat-box">
-        <div class="sb-icon" style="background:#e0f2f4">⚡</div>
-        <div class="sb-num">42</div>
-        <div class="sb-label">مشاركة تفاعلية</div>
+        <div class="sb-icon">📚</div>
+        <div class="sb-num" id="sbCoursesNum">—</div>
+        <div class="sb-label">المقررات</div>
       </div>
       <div class="stat-box">
         <div class="sb-icon" style="background:#fef5e5">📝</div>
-        <div class="sb-num">8<small>/10</small></div>
-        <div class="sb-label">الاختبارات</div>
+        <div class="sb-num" id="sbItemsNum">—</div>
+        <div class="sb-label">عناصر التقييم</div>
       </div>
       <div class="stat-box">
-        <div class="sb-icon">📚</div>
-        <div class="sb-num">4</div>
-        <div class="sb-label">المقررات</div>
+        <div class="sb-icon" style="background:#e5f5ee">🗒️</div>
+        <div class="sb-num" id="sbNotesNum">—</div>
+        <div class="sb-label">ملاحظاتي</div>
+      </div>
+      <div class="stat-box">
+        <div class="sb-icon" style="background:#e0f2f4">💬</div>
+        <div class="sb-num" id="sbFeedbackNum">—</div>
+        <div class="sb-label">تعليقات الدكتور</div>
       </div>
     </div>
 
@@ -1941,97 +1894,20 @@ p{color:var(--ink-2);font-size:14.5px}
     </div>
 
     <div class="tab-pane active" id="tab-courses">
-      <div class="course-item">
-        <div class="course-icon">📜</div>
-        <div class="course-body">
-          <b>مقدمة في القانون</b>
-          <span>د. محمود الزين</span>
-        </div>
-        <div class="course-score"><b>88</b><small>من 100</small></div>
-      </div>
-      <div class="course-item">
-        <div class="course-icon">⚖️</div>
-        <div class="course-body">
-          <b>مبادئ القانون الدستوري</b>
-          <span>د. محمود الزين</span>
-        </div>
-        <div class="course-score"><b>76</b><small>من 100</small></div>
-      </div>
-      <div class="course-item">
-        <div class="course-icon">📗</div>
-        <div class="course-body">
-          <b>مبادئ القانون المدني</b>
-          <span>د. محمود الزين</span>
-        </div>
-        <div class="course-score"><b>92</b><small>من 100</small></div>
-      </div>
-      <div class="course-item">
-        <div class="course-icon">📋</div>
-        <div class="course-body">
-          <b>مبادئ القانون الجنائي</b>
-          <span>د. محمود الزين</span>
-        </div>
-        <div class="course-score"><b>81</b><small>من 100</small></div>
-      </div>
+      <div id="coursesList"></div>
     </div>
 
     <div class="tab-pane" id="tab-grades">
-      <div class="grade-list">
-        <div class="grade-item">
-          <div class="course-icon" style="width:38px;height:38px;font-size:16px">📝</div>
-          <div class="grade-body">
-            <b>اختبار أنواع الحقوق</b>
-            <span>مقدمة في القانون · اختبار</span>
-          </div>
-          <div class="grade-value">9/10</div>
-        </div>
-        <div class="grade-item">
-          <div class="course-icon" style="width:38px;height:38px;font-size:16px;background:#e5f5ee">⚡</div>
-          <div class="grade-body">
-            <b>مشاركة — حق التصويت</b>
-            <span>مقدمة في القانون · مشاركة</span>
-          </div>
-          <div class="grade-value">2/2</div>
-        </div>
-        <div class="grade-item">
-          <div class="course-icon" style="width:38px;height:38px;font-size:16px;background:#fef5e5">📋</div>
-          <div class="grade-body">
-            <b>واجب — السلطات الثلاث في الدولة</b>
-            <span>القانون الدستوري · قيد التصحيح</span>
-          </div>
-          <div class="grade-value" style="color:var(--muted)">—</div>
-        </div>
-        <div class="grade-item">
-          <div class="course-icon" style="width:38px;height:38px;font-size:16px">📝</div>
-          <div class="grade-body">
-            <b>اختبار مصادر القانون</b>
-            <span>مقدمة في القانون · اختبار</span>
-          </div>
-          <div class="grade-value">18/20</div>
-        </div>
-      </div>
+      <div class="grade-list" id="gradesList"></div>
     </div>
 
     <div class="tab-pane" id="tab-notes">
       <div class="card" style="padding:16px">
-        <textarea placeholder="اكتب ملاحظتك..." style="width:100%;min-height:70px;padding:12px 14px;border:1.5px solid var(--line-2);border-radius:12px;background:#fbfcfe;outline:none;resize:vertical;font-size:15px;line-height:1.6;color:var(--ink)"></textarea>
-        <button class="btn btn-primary btn-block btn-sm" style="margin-top:10px">حفظ الملاحظة</button>
+        <textarea id="noteBody" placeholder="اكتب ملاحظتك..." style="width:100%;min-height:70px;padding:12px 14px;border:1.5px solid var(--line-2);border-radius:12px;background:#fbfcfe;outline:none;resize:vertical;font-size:15px;line-height:1.6;color:var(--ink)"></textarea>
+        <button class="btn btn-primary btn-block btn-sm" style="margin-top:10px" id="noteSaveBtn">حفظ الملاحظة</button>
       </div>
 
-      <div style="margin-top:14px">
-        <div class="note-item">
-          <div class="note-head"><span>مقدمة في القانون</span><span>12 مارس</span></div>
-          <div class="note-body">مراجعة أنواع الحقوق — السياسية، المدنية، الاقتصادية، والاجتماعية. ركّز على أمثلة حق التصويت.</div>
-        </div>
-        <div class="note-item">
-          <div class="note-head"><span>القانون الدستوري</span><span>8 مارس</span></div>
-          <div class="note-body">مراجعة السلطات الثلاث: التشريعية، التنفيذية، والقضائية — ووظائف كل سلطة.</div>
-        </div>
-        <div class="note-item">
-          <div class="note-head"><span>ملاحظة من د. محمود الزين</span><span>5 مارس</span></div>
-          <div class="note-body">إجابة ممتازة في اختبار أنواع الحقوق 👏 — استمر على هذا المستوى.</div>
-        </div>
-      </div>
+      <div style="margin-top:14px" id="notesList"></div>
     </div>
 
     <div class="profile-logout">
@@ -2084,13 +1960,21 @@ p{color:var(--ink-2);font-size:14.5px}
   </div>
 </nav>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
 <script>
-const VALID_LECTURE_CODE = '482915';
-const VALID_UNI_ID       = '20211234';
-const VALID_SECRET       = 'ABC12345';
+const sb = supabase.createClient(
+  window.APP_CONFIG.SUPABASE_URL,
+  window.APP_CONFIG.SUPABASE_ANON_KEY
+);
 
 let isProfileLoggedIn = false;
 let enteredLectureCode = '';
+let currentSession = null;
+let currentActivityId = null;
+let currentOptions = [];
+let pollTimer = null;
+let currentUserId = null;
 
 const views = document.querySelectorAll('.view');
 const globalTabBar = document.getElementById('globalTabBar');
@@ -2152,7 +2036,7 @@ function refreshJoinState(){
   codeInputs.forEach(inp => inp.classList.toggle('filled', inp.value !== ''));
   if(code.length === 0){
     codeHint.classList.remove('error');
-    codeHint.innerHTML = '💡 للتجربة، الرمز الافتراضي: <b>482915</b>';
+    codeHint.textContent = '💡 أدخل الرمز الظاهر على شاشة القاعة';
   }
 }
 
@@ -2161,7 +2045,7 @@ codeInputs.forEach((inp, i) => {
     inp.value = inp.value.replace(/[^0-9]/g, '').slice(0,1);
     if(inp.value && i < codeInputs.length - 1) codeInputs[i+1].focus();
     codeHint.classList.remove('error');
-    codeHint.innerHTML = '💡 للتجربة، الرمز الافتراضي: <b>482915</b>';
+    codeHint.textContent = '💡 أدخل الرمز الظاهر على شاشة القاعة';
     refreshJoinState();
   });
   inp.addEventListener('keydown', e => {
@@ -2193,7 +2077,7 @@ const loadingSteps = [
   { text: 'لحظات وننقلك إلى القاعة...' },
 ];
 
-function runLoadingFlow(code){
+function runLoadingFlow(code, joinData){
   showView('view-loading');
   loaderCode.textContent = code;
   loaderTitle.textContent = 'جاري تجهيز المحاضرة';
@@ -2217,14 +2101,22 @@ function runLoadingFlow(code){
       clearInterval(progressTimer);
       setTimeout(() => {
         document.getElementById('liveCode').textContent = code;
+        if(joinData && joinData.session){
+          const liveTitleEl = document.getElementById('liveTitle');
+          if(liveTitleEl) liveTitleEl.textContent = joinData.session.title || '';
+          updateAskAvailability(joinData.session.questions_open);
+        }
         showView('view-live');
-        switchState('waiting');
+        renderActivity(joinData ? joinData.activity : null, joinData ? (joinData.options || []) : []);
+        loadQuestions();
+        startSessionPolling();
       }, 280);
     }
   }, 30);
 }
 
-joinBtn.addEventListener('click', () => {
+let joining = false;
+joinBtn.addEventListener('click', async () => {
   const code = getCode();
   if(code.length !== 6){
     codeBox.classList.add('shake');
@@ -2233,15 +2125,28 @@ joinBtn.addEventListener('click', () => {
     setTimeout(() => codeBox.classList.remove('shake'), 420);
     return;
   }
-  if(code !== VALID_LECTURE_CODE){
+  if(joining) return;
+  joining = true;
+  joinBtn.disabled = true;
+  joinBtn.textContent = 'جاري التحقق...';
+
+  const { data, error } = await sb.rpc('join_lecture', { p_code: code });
+
+  joining = false;
+  joinBtn.disabled = false;
+  joinBtn.textContent = 'دخول المحاضرة';
+
+  if(error || !data || !data.ok){
     codeBox.classList.add('shake');
     codeHint.classList.add('error');
     codeHint.textContent = '⚠️ الرمز غير صحيح أو انتهت صلاحيته';
     setTimeout(() => codeBox.classList.remove('shake'), 420);
     return;
   }
+
   enteredLectureCode = code;
-  runLoadingFlow(code);
+  currentSession = data.session;
+  runLoadingFlow(code, data);
 });
 
 const copyCodeBtn = document.getElementById('copyCodeBtn');
@@ -2309,168 +2214,70 @@ const boardOptions     = document.getElementById('boardOptions');
 const optionsList      = document.getElementById('optionsList');
 const boardActions     = document.getElementById('boardActions');
 const submitAnswer     = document.getElementById('submitAnswer');
-const simulateBtn      = document.getElementById('simulateBtn');
 
-const CONTENT = {
-  question: {
-    tag: '❓ سؤال', tagClass: '',
-    media: null,
-    title: 'حق التصويت يُعدّ من الحقوق:',
-    description: '',
-    options: [
-      { key: 'أ', text: 'السياسية' },
-      { key: 'ب', text: 'المدنية' },
-      { key: 'ج', text: 'الاقتصادية' },
-      { key: 'د', text: 'الاجتماعية' }
-    ],
-    action: 'إرسال الإجابة'
-  },
-
-  image: {
-    tag: '🖼️ صورة', tagClass: 'image',
-    media: {
-      type: 'image',
-      svg: `<svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="powerLeg" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#17568d"/>
-            <stop offset="100%" stop-color="#3d8bc7"/>
-          </linearGradient>
-          <linearGradient id="powerExec" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#0d7d8a"/>
-            <stop offset="100%" stop-color="#0d9668"/>
-          </linearGradient>
-          <linearGradient id="powerJud" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#7c5a1a"/>
-            <stop offset="100%" stop-color="#c77700"/>
-          </linearGradient>
-        </defs>
-        <rect width="400" height="240" fill="#f4f6fa"/>
-        <text x="200" y="34" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="14" font-weight="800" fill="#0b3356">
-          السلطات الثلاث في الدولة
-        </text>
-
-        <rect x="26" y="60" width="106" height="140" rx="12" fill="url(#powerLeg)"/>
-        <text x="79" y="100" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="30" fill="#ffffff">🏛️</text>
-        <text x="79" y="130" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="13" font-weight="800" fill="#ffffff">التشريعية</text>
-        <text x="79" y="152" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="10.5" fill="rgba(255,255,255,.9)">البرلمان</text>
-        <text x="79" y="170" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="10.5" fill="rgba(255,255,255,.9)">سن القوانين</text>
-
-        <rect x="147" y="60" width="106" height="140" rx="12" fill="url(#powerExec)"/>
-        <text x="200" y="100" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="30" fill="#ffffff">⚙️</text>
-        <text x="200" y="130" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="13" font-weight="800" fill="#ffffff">التنفيذية</text>
-        <text x="200" y="152" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="10.5" fill="rgba(255,255,255,.9)">الحكومة</text>
-        <text x="200" y="170" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="10.5" fill="rgba(255,255,255,.9)">تنفيذ القوانين</text>
-
-        <rect x="268" y="60" width="106" height="140" rx="12" fill="url(#powerJud)"/>
-        <text x="321" y="100" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="30" fill="#ffffff">⚖️</text>
-        <text x="321" y="130" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="13" font-weight="800" fill="#ffffff">القضائية</text>
-        <text x="321" y="152" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="10.5" fill="rgba(255,255,255,.9)">المحاكم</text>
-        <text x="321" y="170" text-anchor="middle" font-family="Tajawal, sans-serif" font-size="10.5" fill="rgba(255,255,255,.9)">الفصل في المنازعات</text>
-      </svg>`,
-      caption: 'السلطات الثلاث في الدولة — مفهوم أساسي'
-    },
-    title: 'السلطات الثلاث في الدولة',
-    description: 'تتكون الدولة الحديثة من ثلاث سلطات رئيسية: التشريعية (تسن القوانين)، التنفيذية (تنفذها)، والقضائية (تفصل في المنازعات).',
-    options: null,
-    action: null
-  },
-
-  video: {
-    tag: '🎬 فيديو', tagClass: 'video',
-    media: { type: 'video', title: 'شرح مبسّط — السلطات الثلاث في الدولة', duration: '06:32' },
-    title: 'شاهد الفيديو ثم أجب عن السؤال بعده',
-    description: 'مقطع قصير يشرح السلطات الثلاث في الدولة ووظائف كل سلطة بأمثلة بسيطة.',
-    options: null, action: null
-  },
-
-  pdf: {
-    tag: '📄 ملف PDF', tagClass: 'file',
-    media: {
-      type: 'file',
-      name: 'مقدمة_في_القانون_المحاضرة_الثالثة.pdf',
-      meta: 'PDF · 1.8 ميجابايت · 15 صفحة'
-    },
-    title: 'مقدمة في القانون — المحاضرة الثالثة',
-    description: 'محتوى المحاضرة: أنواع الحقوق، السلطات الثلاث، ومصادر القانون.',
-    options: null, action: null
-  },
-
-  announcement: {
-    tag: '📢 إعلان', tagClass: 'announcement',
-    media: null,
-    title: '📢 مراجعة منتصف الفصل — مقدمة في القانون',
-    description: 'يوم الأحد القادم الساعة 10 صباحاً. راجع الفصول (1-3) خاصة أنواع الحقوق والسلطات الثلاث.',
-    options: null, action: null
-  }
+const KIND_META = {
+  question:     { tag: '❓ سؤال',  cls: '' },
+  image:        { tag: '🖼️ صورة', cls: 'image' },
+  video:        { tag: '🎬 فيديو', cls: 'video' },
+  file:         { tag: '📄 ملف',   cls: 'file' },
+  announcement: { tag: '📢 إعلان', cls: 'announcement' },
 };
+const ARABIC_KEYS = ['أ','ب','ج','د','هـ','و','ز','ح'];
 
-function renderBoard(type){
-  const c = CONTENT[type];
-  if(!c) return;
+function escapeHtml(s){
+  return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
 
-  boardTag.textContent = c.tag;
-  boardTag.className = 'board-tag ' + (c.tagClass || '');
-  boardTime.textContent = 'الآن';
-
-  if(c.media){
-    if(c.media.type === 'image'){
-      boardMedia.innerHTML = `
-        <div class="media-image">
-          ${c.media.svg}
-          ${c.media.caption ? `
-            <div class="media-caption">
-              <span>🖼️</span>
-              <span>${c.media.caption}</span>
-            </div>
-          ` : ''}
-        </div>`;
-    }
-    else if(c.media.type === 'video'){
-      boardMedia.innerHTML = `
-        <div class="media-video">
-          <div class="mv-thumb"></div>
-          <div class="mv-play">▶</div>
-          <div class="mv-info">
-            <b>${c.media.title}</b>
-            <span class="mv-duration">${c.media.duration}</span>
-          </div>
-        </div>`;
-      boardMedia.querySelector('.media-video').addEventListener('click', () => {
-        if(navigator.vibrate) navigator.vibrate(10);
-      });
-    }
-    else if(c.media.type === 'file'){
-      boardMedia.innerHTML = `
-        <div class="media-file">
-          <div class="media-file-icon">PDF</div>
-          <div class="media-file-info">
-            <b>${c.media.name}</b>
-            <span>${c.media.meta}</span>
-          </div>
-          <div class="media-file-actions">
-            <button class="file-btn read">👁️ قراءة</button>
-            <button class="file-btn download">⬇ تحميل</button>
-          </div>
-        </div>`;
-    }
+function renderMedia(activity){
+  const media = activity.media;
+  if(!media){ boardMedia.innerHTML = ''; return; }
+  const type = media.type || activity.kind;
+  if(type === 'image'){
+    const src = media.url ? `<img src="${escapeHtml(media.url)}" alt="" style="max-width:100%;border-radius:12px">` : (media.svg || '');
+    boardMedia.innerHTML = `<div class="media-image">${src}${media.caption ? `<div class="media-caption"><span>🖼️</span><span>${escapeHtml(media.caption)}</span></div>` : ''}</div>`;
+  } else if(type === 'video'){
+    boardMedia.innerHTML = `<div class="media-video"><div class="mv-thumb"></div><div class="mv-play">▶</div><div class="mv-info"><b>${escapeHtml(media.title || '')}</b>${media.duration ? `<span class="mv-duration">${escapeHtml(media.duration)}</span>` : ''}</div></div>`;
+  } else if(type === 'file'){
+    boardMedia.innerHTML = `<div class="media-file"><div class="media-file-icon">PDF</div><div class="media-file-info"><b>${escapeHtml(media.name || '')}</b><span>${escapeHtml(media.meta || '')}</span></div></div>`;
   } else {
     boardMedia.innerHTML = '';
   }
+}
 
-  boardTitle.textContent = c.title || '';
-  boardDescription.textContent = c.description || '';
+function renderActivity(activity, options){
+  if(!activity){
+    currentActivityId = null;
+    currentOptions = [];
+    switchState('waiting');
+    return;
+  }
 
-  if(c.options && c.options.length){
+  currentActivityId = activity.id;
+  currentOptions = options || [];
+
+  const meta = KIND_META[activity.kind] || KIND_META.question;
+  boardTag.textContent = meta.tag;
+  boardTag.className = 'board-tag ' + (meta.cls || '');
+  boardTime.textContent = 'الآن';
+
+  renderMedia(activity);
+
+  boardTitle.textContent = activity.prompt || '';
+  boardDescription.textContent = activity.description || '';
+
+  const existingErr = document.getElementById('submitErr');
+  if(existingErr) existingErr.remove();
+
+  if(activity.kind === 'question' && currentOptions.length){
     boardOptions.style.display = '';
-    boardActions.style.display = '';
-    optionsList.innerHTML = c.options.map(o => `
-      <button class="option" data-key="${o.key}">
-        <span class="key">${o.key}</span>
-        ${o.text}
+    optionsList.innerHTML = currentOptions.map((o, i) => `
+      <button class="option" data-option="${escapeHtml(o.id)}">
+        <span class="key">${ARABIC_KEYS[i] || ''}</span>
+        ${escapeHtml(o.label)}
       </button>
     `).join('');
-    submitAnswer.textContent = c.action || 'إرسال الإجابة';
 
     optionsList.querySelectorAll('.option').forEach(opt => {
       opt.addEventListener('click', () => {
@@ -2479,6 +2286,11 @@ function renderBoard(type){
         if(navigator.vibrate) navigator.vibrate(8);
       });
     });
+
+    const isOpen = activity.status === 'open';
+    boardActions.style.display = isOpen ? '' : 'none';
+    submitAnswer.textContent = 'إرسال الإجابة';
+    submitAnswer.disabled = !isOpen;
   } else {
     boardOptions.style.display = 'none';
     boardActions.style.display = 'none';
@@ -2486,27 +2298,10 @@ function renderBoard(type){
   }
 
   switchState('board');
-
-  document.querySelectorAll('.preview-tab').forEach(t => {
-    t.classList.toggle('active', t.dataset.preview === type);
-  });
 }
 
-document.querySelectorAll('.preview-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    if(navigator.vibrate) navigator.vibrate(8);
-    renderBoard(tab.dataset.preview);
-  });
-});
-
-simulateBtn.addEventListener('click', () => {
-  renderBoard('question');
-  setTimeout(() => {
-    stateBoard.scrollIntoView({ behavior:'smooth', block:'start' });
-  }, 100);
-});
-
-submitAnswer.addEventListener('click', () => {
+submitAnswer.addEventListener('click', async () => {
+  if(!currentActivityId) return;
   const selected = optionsList.querySelector('.option.selected');
   if(!selected){
     optionsList.animate(
@@ -2516,6 +2311,27 @@ submitAnswer.addEventListener('click', () => {
     );
     return;
   }
+
+  submitAnswer.disabled = true;
+  const anonymous = !isProfileLoggedIn;
+
+  const { data, error } = await sb.rpc('submit_activity_response', {
+    p_activity: currentActivityId,
+    p_option: selected.dataset.option,
+    p_anonymous: anonymous,
+  });
+
+  if(error || !data || !data.ok){
+    submitAnswer.disabled = false;
+    const msg = (data && data.error === 'already_answered') ? 'لقد أجبت على هذا النشاط مسبقاً'
+              : (data && data.error === 'closed') ? 'انتهى وقت الإجابة على هذا النشاط'
+              : 'تعذّر إرسال إجابتك، حاول مرة أخرى';
+    const old = document.getElementById('submitErr');
+    if(old) old.remove();
+    optionsList.insertAdjacentHTML('afterend', `<div class="code-hint error" id="submitErr">⚠️ ${msg}</div>`);
+    return;
+  }
+
   if(navigator.vibrate) navigator.vibrate([10, 40, 10]);
   switchState('submitted');
   setTimeout(() => {
@@ -2523,13 +2339,43 @@ submitAnswer.addEventListener('click', () => {
   }, 100);
 });
 
+function startSessionPolling(){
+  stopSessionPolling();
+  if(!currentSession) return;
+  pollTimer = setInterval(refreshSessionState, 5000);
+}
+function stopSessionPolling(){
+  if(pollTimer) clearInterval(pollTimer);
+  pollTimer = null;
+}
+async function refreshSessionState(){
+  if(!currentSession) return;
+  const { data, error } = await sb.rpc('get_session_state', { p_session: currentSession.id });
+  if(error || !data || !data.ok) return;
+  currentSession.questions_open = data.questions_open;
+  currentSession.is_active = data.is_active;
+  updateAskAvailability(data.questions_open);
+
+  const newId = data.activity ? data.activity.id : null;
+  if(newId !== currentActivityId){
+    renderActivity(data.activity, data.options || []);
+  }
+}
 const askStatus     = document.getElementById('askStatus');
 const askStatusText = document.getElementById('askStatusText');
 const askOpen       = document.getElementById('askOpen');
 const askClosed     = document.getElementById('askClosed');
+const askBody       = document.getElementById('askBody');
+const askSendBtn    = document.getElementById('askSendBtn');
+const askList       = document.getElementById('askList');
+
+function updateAskAvailability(isOpen){
+  setAskState(!!isOpen);
+}
 
 function setAskState(state){
-  if(state === 'open'){
+  const open = (state === 'open' || state === true);
+  if(open){
     askStatus.className = 'ask-status open';
     askStatusText.textContent = 'مفتوح';
     askOpen.hidden = false;
@@ -2540,24 +2386,68 @@ function setAskState(state){
     askOpen.hidden = true;
     askClosed.hidden = false;
   }
-  document.querySelectorAll('.ask-demo-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.ask === state);
-  });
 }
 
-document.querySelectorAll('.ask-demo-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    if(navigator.vibrate) navigator.vibrate(8);
-    setAskState(btn.dataset.ask);
-  });
-});
+function formatWhen(iso){
+  if(!iso) return '';
+  const d = new Date(iso);
+  try {
+    return d.toLocaleString('ar', { hour: '2-digit', minute: '2-digit', day: 'numeric', month: 'short' });
+  } catch(e){
+    return d.toLocaleString();
+  }
+}
 
+async function loadQuestions(){
+  if(!currentSession){ askList.innerHTML = ''; return; }
+  const { data } = await sb
+    .from('student_questions')
+    .select('id, body, created_at')
+    .eq('session_id', currentSession.id)
+    .order('created_at', { ascending: false });
+  if(!data || !data.length){
+    askList.innerHTML = '<div class="code-hint">لم تُرسل أي سؤال بعد في هذه المحاضرة.</div>';
+    return;
+  }
+  askList.innerHTML = data.map(q => `
+    <div class="qfrom">
+      <div class="qh"><span>أنت</span><span>${formatWhen(q.created_at)}</span></div>
+      <p>${escapeHtml(q.body)}</p>
+    </div>
+  `).join('');
+}
+
+if(askSendBtn){
+  askSendBtn.addEventListener('click', async () => {
+    if(!currentSession) return;
+    const body = askBody.value.trim();
+    if(!body) return;
+    askSendBtn.disabled = true;
+    askSendBtn.textContent = 'جاري الإرسال...';
+    const { data, error } = await sb.rpc('post_question', {
+      p_session: currentSession.id,
+      p_body: body,
+      p_anonymous: !isProfileLoggedIn,
+    });
+    askSendBtn.disabled = false;
+    askSendBtn.textContent = 'إرسال السؤال';
+    if(error || !data || !data.ok){
+      askBody.classList.add('shake');
+      setTimeout(() => askBody.classList.remove('shake'), 420);
+      return;
+    }
+    askBody.value = '';
+    loadQuestions();
+  });
+}
 const uniIdInput     = document.getElementById('uniId');
 const secretInput    = document.getElementById('secretCode');
 const secretToggle   = document.getElementById('secretToggle');
 const secretProgress = document.querySelectorAll('#secretProgress span');
 const profileLoginBtn= document.getElementById('profileLoginBtn');
 const profileHint    = document.getElementById('profileHint');
+
+const DEFAULT_HINT = '💡 أدخل رقمك الجامعي والكود السري الخاص بك';
 
 function openProfileLogin(){
   uniIdInput.value = '';
@@ -2568,7 +2458,7 @@ function openProfileLogin(){
   secretToggle.textContent = '👁️';
   resetSecretProgress();
   profileHint.classList.remove('error');
-  profileHint.innerHTML = '💡 للتجربة: الرقم الجامعي <b>20211234</b> · الكود <b>ABC12345</b>';
+  profileHint.textContent = DEFAULT_HINT;
   refreshProfileLoginState();
   showView('view-profile-login');
   setTimeout(() => uniIdInput.focus(), 300);
@@ -2587,24 +2477,24 @@ function resetSecretProgress(){
 function refreshProfileLoginState(){
   const id     = uniIdInput.value.trim();
   const secret = secretInput.value.trim();
-  profileLoginBtn.disabled = !(id.length >= 6 && secret.length === 8);
+  profileLoginBtn.disabled = !(id.length >= 6 && secret.length >= 6);
 }
 
 uniIdInput.addEventListener('input', () => {
   uniIdInput.value = uniIdInput.value.replace(/[^0-9]/g, '');
   uniIdInput.classList.toggle('filled', uniIdInput.value.length > 0);
   profileHint.classList.remove('error');
-  profileHint.innerHTML = '💡 للتجربة: الرقم الجامعي <b>20211234</b> · الكود <b>ABC12345</b>';
+  profileHint.textContent = DEFAULT_HINT;
   refreshProfileLoginState();
 });
 
 secretInput.addEventListener('input', () => {
   let v = secretInput.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
-  secretInput.value = v.slice(0, 8);
+  secretInput.value = v.slice(0, 12);
   secretInput.classList.toggle('filled', secretInput.value.length > 0);
   updateSecretProgress();
   profileHint.classList.remove('error');
-  profileHint.innerHTML = '💡 للتجربة: الرقم الجامعي <b>20211234</b> · الكود <b>ABC12345</b>';
+  profileHint.textContent = DEFAULT_HINT;
   refreshProfileLoginState();
 });
 
@@ -2618,55 +2508,227 @@ secretToggle.addEventListener('click', () => {
   setTimeout(() => secretInput.setSelectionRange(len, len), 0);
 });
 
-profileLoginBtn.addEventListener('click', () => {
+profileLoginBtn.addEventListener('click', async () => {
   const id     = uniIdInput.value.trim();
   const secret = secretInput.value.trim().toUpperCase();
-
-  if(id !== VALID_UNI_ID){
-    uniIdInput.classList.add('shake');
-    profileHint.classList.add('error');
-    profileHint.textContent = '⚠️ الرقم الجامعي غير مطابق للسجل';
-    setTimeout(() => uniIdInput.classList.remove('shake'), 420);
-    return;
-  }
-
-  if(secret !== VALID_SECRET){
-    secretInput.classList.add('shake');
-    profileHint.classList.add('error');
-    profileHint.textContent = '⚠️ الكود السري غير صحيح';
-    setTimeout(() => secretInput.classList.remove('shake'), 420);
-    return;
-  }
-
-  isProfileLoggedIn = true;
-  if(navigator.vibrate) navigator.vibrate([10, 40, 10]);
 
   profileLoginBtn.disabled = true;
   profileLoginBtn.textContent = 'جاري التحقق...';
 
-  setTimeout(() => {
-    profileLoginBtn.textContent = 'دخول إلى ملفي';
-    profileLoginBtn.disabled = false;
-    showView('view-profile');
-  }, 700);
+  const email = id + '@students.local';
+  const { data, error } = await sb.auth.signInWithPassword({ email, password: secret });
+
+  profileLoginBtn.textContent = 'دخول إلى ملفي';
+  refreshProfileLoginState();
+
+  if(error || !data || !data.user){
+    uniIdInput.classList.add('shake');
+    secretInput.classList.add('shake');
+    profileHint.classList.add('error');
+    profileHint.textContent = '⚠️ الرقم الجامعي أو الكود السري غير صحيح';
+    setTimeout(() => {
+      uniIdInput.classList.remove('shake');
+      secretInput.classList.remove('shake');
+    }, 420);
+    return;
+  }
+
+  isProfileLoggedIn = true;
+  currentUserId = data.user.id;
+  if(navigator.vibrate) navigator.vibrate([10, 40, 10]);
+
+  await loadProfile();
+  showView('view-profile');
 });
 
-document.getElementById('profileLogoutBtn').addEventListener('click', () => {
+document.getElementById('profileLogoutBtn').addEventListener('click', async () => {
+  await sb.auth.signOut();
   isProfileLoggedIn = false;
+  currentUserId = null;
   openProfileLogin();
 });
 
 document.getElementById('globalLeaveBtn').addEventListener('click', () => {
   stopLiveTimer();
-  isProfileLoggedIn = false;
+  stopSessionPolling();
+  currentSession = null;
+  currentActivityId = null;
+  currentOptions = [];
   enteredLectureCode = '';
   codeInputs.forEach(i => i.value = '');
   refreshJoinState();
   switchState('waiting');
   setAskState('open');
+  if(askList) askList.innerHTML = '';
   showView('view-home');
 });
 
+const KIND_LABEL = { assessment:'اختبار', participation:'مشاركة', assignment:'واجب' };
+const KIND_ICON  = { assessment:'📝', participation:'⚡', assignment:'📋' };
+
+async function loadProfile(){
+  if(!currentUserId) return;
+
+  const { data: prof } = await sb
+    .from('profiles')
+    .select('full_name, university_id, department, level')
+    .eq('id', currentUserId)
+    .single();
+
+  if(prof){
+    document.getElementById('profileName').textContent = prof.full_name || '—';
+    document.getElementById('profileAvatar').textContent = (prof.full_name || '؟').trim().charAt(0) || '؟';
+    const metaParts = [prof.university_id, prof.department, prof.level].filter(Boolean);
+    document.getElementById('profileMeta').textContent = metaParts.join(' · ') || '—';
+  }
+
+  const { data: memberships } = await sb
+    .from('course_memberships')
+    .select('course_id')
+    .eq('profile_id', currentUserId);
+
+  const courseIds = (memberships || []).map(m => m.course_id);
+
+  let courses = [];
+  if(courseIds.length){
+    const { data: c } = await sb.from('courses').select('id, name, code, instructor_id').in('id', courseIds);
+    courses = c || [];
+  }
+
+  let items = [];
+  if(courseIds.length){
+    const { data: it } = await sb
+      .from('grade_items')
+      .select('id, title, kind, max_score, course_id')
+      .in('course_id', courseIds);
+    items = it || [];
+  }
+
+  const { data: grades } = await sb
+    .from('grades')
+    .select('grade_item_id, score, status')
+    .eq('student_id', currentUserId);
+
+  const gradeByItem = {};
+  (grades || []).forEach(g => { gradeByItem[g.grade_item_id] = g; });
+
+  const { data: notes } = await sb
+    .from('student_notes')
+    .select('id, body, created_at, course_id')
+    .eq('student_id', currentUserId)
+    .order('created_at', { ascending: false });
+
+  const { data: feedback } = await sb
+    .from('instructor_feedback')
+    .select('id, body, created_at, course_id')
+    .eq('student_id', currentUserId)
+    .order('created_at', { ascending: false });
+
+  renderCourses(courses, items, gradeByItem);
+  renderGrades(items, gradeByItem, courses);
+  renderNotes(notes || [], courses);
+  renderFeedback(feedback || []);
+
+  document.getElementById('sbCoursesNum').textContent = courses.length;
+  document.getElementById('sbItemsNum').textContent = items.length;
+  document.getElementById('sbNotesNum').textContent = (notes || []).length;
+  document.getElementById('sbFeedbackNum').textContent = (feedback || []).length;
+
+  let sum = 0, max = 0;
+  items.forEach(it => {
+    const g = gradeByItem[it.id];
+    if(g && g.status === 'published' && g.score != null){
+      sum += Number(g.score); max += Number(it.max_score);
+    }
+  });
+  const pct = max > 0 ? Math.round((sum / max) * 100) : 0;
+  document.getElementById('profileScoreNum').textContent = pct;
+  const bar = document.getElementById('profileBar');
+  bar.dataset.w = pct;
+  bar.style.width = pct + '%';
+}
+
+function renderCourses(courses, items, gradeByItem){
+  const el = document.getElementById('coursesList');
+  if(!courses.length){ el.innerHTML = '<div class="code-hint">لا توجد مقررات مسجّلة.</div>'; return; }
+  el.innerHTML = courses.map(c => {
+    let sum=0, max=0;
+    items.filter(i => i.course_id === c.id).forEach(i => {
+      const g = gradeByItem[i.id];
+      if(g && g.status === 'published' && g.score != null){ sum += Number(g.score); max += Number(i.max_score); }
+    });
+    const score = max > 0 ? Math.round((sum/max)*100) : null;
+    return `
+      <div class="course-item">
+        <div class="course-icon">📚</div>
+        <div class="course-body">
+          <b>${escapeHtml(c.name)}</b>
+          <span>${escapeHtml(c.code || '')}</span>
+        </div>
+        <div class="course-score">${score == null ? '<small>—</small>' : `<b>${score}</b><small>من 100</small>`}</div>
+      </div>`;
+  }).join('');
+}
+
+function renderGrades(items, gradeByItem, courses){
+  const el = document.getElementById('gradesList');
+  if(!items.length){ el.innerHTML = '<div class="code-hint">لا توجد عناصر تقييم بعد.</div>'; return; }
+  const courseName = id => { const c = courses.find(x => x.id === id); return c ? c.name : ''; };
+  el.innerHTML = items.map(it => {
+    const g = gradeByItem[it.id];
+    const published = g && g.status === 'published' && g.score != null;
+    const value = published ? `${g.score}/${it.max_score}` : '<span style="color:var(--muted)">—</span>';
+    const statusText = published ? KIND_LABEL[it.kind] : 'قيد التصحيح';
+    return `
+      <div class="grade-item">
+        <div class="course-icon" style="width:38px;height:38px;font-size:16px">${KIND_ICON[it.kind] || '📝'}</div>
+        <div class="grade-body">
+          <b>${escapeHtml(it.title)}</b>
+          <span>${escapeHtml(courseName(it.course_id))} · ${escapeHtml(statusText)}</span>
+        </div>
+        <div class="grade-value">${value}</div>
+      </div>`;
+  }).join('');
+}
+
+function renderNotes(notes, courses){
+  const el = document.getElementById('notesList');
+  if(!notes.length){ el.innerHTML = '<div class="code-hint">لا توجد ملاحظات بعد.</div>'; return; }
+  const courseName = id => { const c = courses.find(x => x.id === id); return c ? c.name : 'عام'; };
+  el.innerHTML = notes.map(n => `
+    <div class="note-item">
+      <div class="note-head"><span>${escapeHtml(courseName(n.course_id))}</span><span>${formatWhen(n.created_at)}</span></div>
+      <div class="note-body">${escapeHtml(n.body)}</div>
+    </div>`).join('');
+}
+
+function renderFeedback(feedback){
+  if(!feedback.length) return;
+  const el = document.getElementById('notesList');
+  el.insertAdjacentHTML('beforeend', feedback.map(f => `
+    <div class="note-item">
+      <div class="note-head"><span>ملاحظة من الدكتور</span><span>${formatWhen(f.created_at)}</span></div>
+      <div class="note-body">${escapeHtml(f.body)}</div>
+    </div>`).join(''));
+}
+
+const noteBody    = document.getElementById('noteBody');
+const noteSaveBtn = document.getElementById('noteSaveBtn');
+if(noteSaveBtn){
+  noteSaveBtn.addEventListener('click', async () => {
+    if(!currentUserId) return;
+    const body = noteBody.value.trim();
+    if(!body) return;
+    noteSaveBtn.disabled = true;
+    noteSaveBtn.textContent = 'جاري الحفظ...';
+    const { error } = await sb.from('student_notes').insert({ student_id: currentUserId, body });
+    noteSaveBtn.disabled = false;
+    noteSaveBtn.textContent = 'حفظ الملاحظة';
+    if(error){ noteBody.classList.add('shake'); setTimeout(() => noteBody.classList.remove('shake'),420); return; }
+    noteBody.value = '';
+    await loadProfile();
+  });
+}
 let liveTimerId = null;
 let liveSeconds = 0;
 
@@ -2714,11 +2776,19 @@ document.querySelectorAll('.tab-pill').forEach(btn => {
   el.innerHTML = html;
 })();
 
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
   refreshJoinState();
   refreshProfileLoginState();
   resetSecretProgress();
   globalTabBar.classList.add('show');
+
+  const { data } = await sb.auth.getSession();
+  const session = data && data.session;
+  if(session && session.user){
+    isProfileLoggedIn = true;
+    currentUserId = session.user.id;
+    loadProfile();
+  }
 });
 </script>
 
